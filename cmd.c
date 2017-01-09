@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:25:26 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:04:06 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	ft_echo(char *input)
 	input += 4;
 	while (input[i] == ' ' || input[i] == '\t')
 		++input;
+	if (!input)
+		ft_putchar('\n');
 	ft_putstr(input);
 }
 
@@ -74,15 +76,15 @@ void	ft_cd(char *input, t_env *env)
 
 void	ft_reco_cmd(char *input, t_env *env)
 {
-	if (ft_cmpspec(input, "cd") == 1)
+	if (ft_cmpspec(input, "cd", 1) == 1)
 		ft_cd(input, env);
-	else if (ft_cmpspec(input, "echo") == 1)
+	else if (ft_cmpspec(input, "echo", 0) == 1)
 		ft_echo(input);
-	else if (ft_cmpspec(input, "setenv") == 1)
+	else if (ft_cmpspec(input, "setenv", 1) == 1)
 		add_var_to_env(env, input);
-	else if (ft_cmpspec(input, "unsetenv") == 1)
+	else if (ft_cmpspec(input, "unsetenv", 1) == 1)
 		suppr_var_env(env, input);
-	else if (ft_cmpspec(input, "env") == 1)
+	else if (ft_cmpspec(input, "env", 0) == 1)
 		print_env(env);
 	else
 		error(-2, input);

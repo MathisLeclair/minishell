@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:24:02 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:00:31 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define PROMPT "$\e[0;31mms\e[0m>"
 # include <signal.h>
 # include <unistd.h>
-#include <dirent.h>
+# include <dirent.h>
 # define INPUT_SIZE 4096
 
 typedef struct	s_env
@@ -28,24 +28,28 @@ typedef struct	s_env
 }				t_env;
 
 /*
-ft_cmpspec.c
+** ft_cmpspec.c
 */
-int				ft_cmpspec(char *s1, char *str);
+
+int				ft_cmpspec(char *s1, char *str, int k);
 
 /*
-cmd.c
+**cmd.c
 */
+
 void			ft_reco_cmd();
 int				ft_read(char *buf, t_env *env);
 
 /*
-error.c
+**error.c
 */
+
 void			error(int i, char *str);
 
 /*
-env_mod.c
+**env_mod.c
 */
+
 void			add_var_to_env(t_env *env, char *str);
 void			suppr_var_env(t_env *env, char *str);
 void			print_env(t_env *env);

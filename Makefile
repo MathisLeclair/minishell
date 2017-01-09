@@ -19,7 +19,8 @@ PATHTOMAKEFILE = ./libft/
 FILE =	main \
 		cmd \
 		error \
-		ft_cmpspec
+		ft_cmpspec \
+		env_mod
 
 OBJ  := $(addsuffix .o, $(FILE))
 

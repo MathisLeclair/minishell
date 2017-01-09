@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:26:14 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:01:56 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	print_env(t_env *env)
 	while (env->ev[i])
 	{
 		ft_putstr(env->ev[i]);
+		ft_putchar('\n');
 		++i;
 	}
 }

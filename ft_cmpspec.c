@@ -6,13 +6,13 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:49:00 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:25:54 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:01:42 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_cmpspec(char *s1, char *str)
+int		ft_cmpspec(char *s1, char *str, int p)
 {
 	int i;
 	int k;
@@ -28,7 +28,7 @@ int		ft_cmpspec(char *s1, char *str)
 		++i;
 	}
 	if (k == (int)ft_strlen(str))
-		if (s1[ft_strlen(str)] == ' ' || s1[ft_strlen(str)] == '\t')
+		if (s1[ft_strlen(str)] == ' ' || s1[ft_strlen(str)] == '\t' || p == 0)
 			return (1);
 	return (0);
 }
