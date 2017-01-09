@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 16:04:06 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:25:44 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,9 @@ int		ft_read(char *buf, t_env *env)
 
 void	ft_echo(char *input)
 {
-	char	*sav;
 	int		i;
 
 	i = 0;
-	sav = input;
-	input += 4;
 	while (input[i] == ' ' || input[i] == '\t')
 		++input;
 	if (!input)
@@ -58,13 +55,9 @@ void	ft_echo(char *input)
 
 void	ft_cd(char *input, t_env *env)
 {
-	char	*sav;
 	int		i;
 
 	i = 0;
-	sav = input;
-	++input;
-	++input;
 	while (input[i] == ' ' || input[i] == '\t')
 		++input;
 	if (input[ft_strlen(input) - 1] == '\n')
@@ -77,13 +70,13 @@ void	ft_cd(char *input, t_env *env)
 void	ft_reco_cmd(char *input, t_env *env)
 {
 	if (ft_cmpspec(input, "cd", 1) == 1)
-		ft_cd(input, env);
+		ft_cd(input + 2, env);
 	else if (ft_cmpspec(input, "echo", 0) == 1)
-		ft_echo(input);
+		ft_echo(input + 4);
 	else if (ft_cmpspec(input, "setenv", 1) == 1)
-		add_var_to_env(env, input);
+		add_var_to_env(env, input + 6);
 	else if (ft_cmpspec(input, "unsetenv", 1) == 1)
-		suppr_var_env(env, input);
+		suppr_var_env(env, input + 8);
 	else if (ft_cmpspec(input, "env", 0) == 1)
 		print_env(env);
 	else
