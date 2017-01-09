@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 16:25:44 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/09 17:06:23 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,30 @@ void	ft_echo(char *input)
 	ft_putstr(input);
 }
 
-void	ft_cd(char *input, t_env *env)
+void	ft_cd(char *inp, t_env *env)
 {
 	int		i;
 
 	i = 0;
-	while (input[i] == ' ' || input[i] == '\t')
-		++input;
-	if (input[ft_strlen(input) - 1] == '\n')
-		input[ft_strlen(input) - 1] = '\0';
-	if (chdir(input) == -1)
+	while (inp[i] && (inp[i] == ' ' || inp[i] == '\t' || inp[i] == '\n'))
+		++inp;
+	if (!inp[i])
+	{
+		if (chdir("/") == -1)
+			error(-1, NULL);
+		getcwd(env->dir, 512);
+		return ;
+	}
+	if (inp[ft_strlen(inp) - 1] == '\n')
+		inp[ft_strlen(inp) - 1] = '\0';
+	if (chdir(inp) == -1)
 		error(-1, NULL);
 	getcwd(env->dir, 512);
 }
 
 void	ft_reco_cmd(char *input, t_env *env)
 {
-	if (ft_cmpspec(input, "cd", 1) == 1)
+	if (ft_cmpspec(input, "cd", 0) == 1)
 		ft_cd(input + 2, env);
 	else if (ft_cmpspec(input, "echo", 0) == 1)
 		ft_echo(input + 4);
@@ -79,6 +86,8 @@ void	ft_reco_cmd(char *input, t_env *env)
 		suppr_var_env(env, input + 8);
 	else if (ft_cmpspec(input, "env", 0) == 1)
 		print_env(env);
+	else if (*input == '\n')
+		return ;
 	else
 		error(-2, input);
 }
