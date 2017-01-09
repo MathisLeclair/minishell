@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:16:05 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:17:33 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	add_var_to_env(t_env *env, char *str)
 		new[i] = env->ev[i];
 		++i;
 	}
-	new[i] = ft_strdup(*str);
+	new[i] = ft_strdup(str);
 	free(env->ev);
 	env->ev = new;
 }
