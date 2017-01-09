@@ -6,14 +6,18 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/07 13:34:55 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 14:45:31 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	error(int i)
+void	error(int i, char *str)
 {
 	if (i == 1)
 		exit(0);
+	if (i == -1)
+		ft_putstr("No such file or directory\n");
+	if (i == -2)
+		ft_printf("shell: command not found : %s", str);
 }

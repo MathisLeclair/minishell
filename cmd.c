@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/08 17:40:29 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:12:04 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,54 @@ int		ft_read(char *buf, t_env *env)
 	ft_reco_cmd(env->input, env); 
 	env->input[0] = '\0';
 	size = 0;
-	ft_putstr(PROMPT);
+	ft_printf("%s%s %s%s", "\e[0;32m", env->dir, PROMPT, "\e[0m");
 	return (0);
+}
+
+void	ft_echo(char *input)
+{
+	char	*sav;
+	int		i;
+
+	i = 0;
+	sav = input;
+	input += 4;
+	while (input[i] == ' ' || input[i] == '\t')
+		++input;
+	ft_putstr(input);
+}
+
+void	ft_cd(char *input, t_env *env)
+{
+	char	*sav;
+	int		i;
+
+	i = 0;
+	sav = input;
+	++input;
+	++input;
+	while (input[i] == ' ' || input[i] == '\t')
+		++input;
+	if (input[ft_strlen(input) - 1] == '\n')
+		input[ft_strlen(input) - 1] = '\0';
+	if(chdir(input) == -1)
+		error(-1, NULL);
+	getcwd(env->dir, 512);
 }
 
 void	ft_reco_cmd(char *input, t_env *env)
 {
 	// char **tab;
 
-	// (void)input;
-	(void)env;
-	printf("%s", input);
+	if(ft_cmpspec(input, "cd") == 1)
+		ft_cd(input, env);
+	else if(ft_cmpspec(input, "echo") == 1)
+		ft_echo(input);
+	else if(add_var_to_env(input, "setenv") == 1)
+		ft_echo(input);
+	else if(suppr_var_env(input, "setenv") == 1)
+		ft_echo(input);
+	else
+		error(-2, input);
 	// execve("/bin/ls", NULL, env->environ);
 }

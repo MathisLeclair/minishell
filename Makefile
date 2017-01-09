@@ -18,7 +18,8 @@ PATHTOMAKEFILE = ./libft/
 
 FILE =	main \
 		cmd \
-		error
+		error \
+		ft_cmpspec
 
 OBJ  := $(addsuffix .o, $(FILE))
 

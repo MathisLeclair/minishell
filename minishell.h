@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/08 13:17:57 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 14:55:56 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 # define MINISHELL_H
 
 # include "./libft/libft.h"
-# define PROMPT "$\e[0;31mminishell\e[0m>"
+# define PROMPT "$\e[0;31mms\e[0m>"
 # include <signal.h>
 # include <unistd.h>
+#include <dirent.h>
 # define INPUT_SIZE 4096
 
 typedef struct	s_env
 {
 	char *input;
-	char **environ;
+	char **ev;
+	char *dir;
 }				t_env;
+
+/*
+ft_cmpspec.c
+*/
+int		ft_cmpspec(char *s1, char *str);
 
 /*
 cmd.c
@@ -34,6 +41,6 @@ int		ft_read(char *buf, t_env *env);
 /*
 error.c
 */
-void	error(int i);
+void	error(int i, char *str);
 
 #endif

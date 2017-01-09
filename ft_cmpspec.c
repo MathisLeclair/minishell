@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   ft_cmpspec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 10:30:12 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 14:45:29 by mleclair         ###   ########.fr       */
+/*   Created: 2017/01/09 14:49:00 by mleclair          #+#    #+#             */
+/*   Updated: 2017/01/09 14:58:18 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int		ft_strequ(char const *s1, char const *s2)
+int		ft_cmpspec(char *s1, char *str)
 {
 	int i;
+	int k;
 
 	i = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (0);
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	if (s1[i] != s2[i])
-		return (0);
-	return (1);
+	k = 0;
+	while(str[i])
+	{
+		if (!s1[i])
+			return (-1);
+		if (str[i] == s1[i])
+			++k;
+		++i;
+	}
+	if (k == (int)ft_strlen(str))
+		if (s1[ft_strlen(str)] == ' ' || s1[ft_strlen(str)] == '\t')
+			return (1);
+	return (0);
 }
