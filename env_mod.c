@@ -6,16 +6,28 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:17:33 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:26:14 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_var_to_env(t_env *env, char *str)
+void	print_env(t_env *env)
 {
 	int i;
-	char **new;
+
+	i = 0;
+	while (env->ev[i])
+	{
+		ft_putstr(env->ev[i]);
+		++i;
+	}
+}
+
+void	add_var_to_env(t_env *env, char *str)
+{
+	int		i;
+	char	**new;
 
 	i = 0;
 	while (env->ev[i])

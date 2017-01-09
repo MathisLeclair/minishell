@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:49:00 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 14:58:18 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:25:54 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_cmpspec(char *s1, char *str)
 
 	i = 0;
 	k = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!s1[i])
 			return (-1);

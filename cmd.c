@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:12:04 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:25:26 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int		ft_read(char *buf, t_env *env)
 	ft_strlcat(env->input, buf, INPUT_SIZE);
 	size += ret;
 	if (size == 0)
-		return(-1);
+		return (-1);
 	if (size >= INPUT_SIZE)
 	{
 		size = INPUT_SIZE - 1;
-		env->input[size-1] = '\n';
+		env->input[size - 1] = '\n';
 	}
-	if (env->input[size-1] != '\n')
+	if (env->input[size - 1] != '\n')
 		return (0);
-	ft_reco_cmd(env->input, env); 
+	ft_reco_cmd(env->input, env);
 	env->input[0] = '\0';
 	size = 0;
 	ft_printf("%s%s %s%s", "\e[0;32m", env->dir, PROMPT, "\e[0m");
@@ -67,24 +67,23 @@ void	ft_cd(char *input, t_env *env)
 		++input;
 	if (input[ft_strlen(input) - 1] == '\n')
 		input[ft_strlen(input) - 1] = '\0';
-	if(chdir(input) == -1)
+	if (chdir(input) == -1)
 		error(-1, NULL);
 	getcwd(env->dir, 512);
 }
 
 void	ft_reco_cmd(char *input, t_env *env)
 {
-	// char **tab;
-
-	if(ft_cmpspec(input, "cd") == 1)
+	if (ft_cmpspec(input, "cd") == 1)
 		ft_cd(input, env);
-	else if(ft_cmpspec(input, "echo") == 1)
+	else if (ft_cmpspec(input, "echo") == 1)
 		ft_echo(input);
-	else if(add_var_to_env(input, "setenv") == 1)
-		ft_echo(input);
-	else if(suppr_var_env(input, "setenv") == 1)
-		ft_echo(input);
+	else if (ft_cmpspec(input, "setenv") == 1)
+		add_var_to_env(env, input);
+	else if (ft_cmpspec(input, "unsetenv") == 1)
+		suppr_var_env(env, input);
+	else if (ft_cmpspec(input, "env") == 1)
+		print_env(env);
 	else
 		error(-2, input);
-	// execve("/bin/ls", NULL, env->environ);
 }

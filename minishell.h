@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 14:55:56 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:24:02 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,24 @@ typedef struct	s_env
 /*
 ft_cmpspec.c
 */
-int		ft_cmpspec(char *s1, char *str);
+int				ft_cmpspec(char *s1, char *str);
 
 /*
 cmd.c
 */
-void	ft_reco_cmd();
-int		ft_read(char *buf, t_env *env);
+void			ft_reco_cmd();
+int				ft_read(char *buf, t_env *env);
 
 /*
 error.c
 */
-void	error(int i, char *str);
+void			error(int i, char *str);
+
+/*
+env_mod.c
+*/
+void			add_var_to_env(t_env *env, char *str);
+void			suppr_var_env(t_env *env, char *str);
+void			print_env(t_env *env);
 
 #endif
