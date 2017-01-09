@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 18:06:10 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:16:35 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int				ft_cmpspec(char *s1, char *str, int k);
 */
 
 void			ft_reco_cmd(char *input, t_env *env);
-int				ft_read(char *buf, t_env *env);
+int				ft_read(t_env *env);
 
 /*
 **error.c

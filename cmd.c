@@ -6,39 +6,21 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 18:25:04 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:16:28 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_read(char *buf, t_env *env)
+int		ft_read(t_env *env)
 {
-	// int		ret;
-	// int		size;
-
-	// size = 0;
-	(void)buf;
 	env->input = malloc(INPUT_SIZE);
-	get_next_line(1, &env->input);
-	// ret = read(0, buf, 500);
-	// if (ret < 0)
-	// 	return (-1);
-	// buf[ret] = '\0';
-	// ft_strlcat(env->input, buf, INPUT_SIZE);
-	// size += ret;
-	// if (size == 0)
-	// 	return (-1);
-	// if (size >= INPUT_SIZE)
-	// {
-	// 	size = INPUT_SIZE - 1;
-	// 	env->input[size - 1] = '\n';
-	// }
-	// if (env->input[size - 1] != '\n')
-	// 	return (0);
-	ft_reco_cmd(env->input, env);
+	*env->input = '\0';
+	if(get_next_line(1, &env->input) == 0)
+		error(1, NULL);
+	if (*env->input != '\0')
+		ft_reco_cmd(env->input, env);
 	env->input[0] = '\0';
-	// size = 0;
 	ft_printf("%s%s %s%s", "\e[0;32m", env->dir, PROMPT, "\e[0m");
 	return (0);
 }
