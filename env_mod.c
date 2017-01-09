@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 18:17:01 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:37:22 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,35 @@ int		find_param_env(t_env *env, char *str)
 	}
 	if (env->ev[i])
 		return (i);
-	else
-		return(-1);
+	return(-1);
+}
+
+void	modif_var_env(t_env *env, char *str, int i)
+{
+	int		k;
+	int		j;
+	char	*new_para;
+
+	j = 0;
+	while (env->ev[i][j] != '=')
+		++j;
+	new_para = malloc(ft_strlen(str) + j + 2);
+	j = -1;
+	while (env->ev[i][++j] != '=')
+		new_para[j] = env->ev[i][j];
+	new_para[j] = '=';
+	k = -1;
+	while (str[++k])
+		new_para[j + k + 1] = str[k];
+	new_para[j + k + 1] = 0;
+	free(env->ev[i]);
+	env->ev[i] = new_para;
 }
 
 void	add_var_to_env(t_env *env, char *str)
 {
 	int		i;
-	int		j;
-	int		k;
 	char	**new_env;
-	char	*new_para;
 
 	i = find_param_env(env, str);
 	if (i == -1)
@@ -72,22 +90,7 @@ void	add_var_to_env(t_env *env, char *str)
 		env->ev = new_env;
 	}
 	else
-	{
-		j = 0;
-		while (env->ev[i][j] != '=')
-			++j;
-		new_para = malloc(ft_strlen(str) + j + 2);
-		j = -1;
-		while (env->ev[i][++j] != '=')
-			new_para[j] = env->ev[i][j];
-		new_para[j] = '=';
-		k = -1;
-		while (str[++k])
-			new_para[j + k + 1] = str[k];
-		new_para[j + k + 1] = 0;
-		free(env->ev[i]);
-		env->ev[i] = new_para;
-	}
+		modif_var_env(env, str, i);
 }
 
 void	suppr_var_env(t_env *env, char *str)
