@@ -6,11 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/01/09 19:10:07 by bfrochot         ###   ########.fr       */
-=======
-/*   Updated: 2017/01/09 19:16:46 by mleclair         ###   ########.fr       */
->>>>>>> 5c0f22dafc89d2c419c44c2b4e1f190aad8f8ea0
+/*   Updated: 2017/01/09 19:20:44 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +33,6 @@ t_env		*env(void)
 	static t_env	env;
 
 	return (&env);
-}
-
-void	ft_hello(int i)
-{
-	i = 0;
 }
 
 int main(int ac, char **av, char **ev)
