@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmpspec.c                                       :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 14:49:00 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 19:10:03 by bfrochot         ###   ########.fr       */
+/*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
+/*   Updated: 2017/01/09 19:17:00 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_cmpspec(char *s1, char *str, int p)
+void	print_env(t_env *env)
 {
 	int i;
-	int k;
 
 	i = 0;
-	k = 0;
-	while (str[i])
+	while (env->ev[i])
 	{
-		if (!s1[i])
-			return (-1);
-		if (str[i] == s1[i])
-			++k;
+		ft_putstr(env->ev[i]);
+		ft_putchar('\n');
 		++i;
 	}
-	if (k == (int)ft_strlen(str))
-		if (s1[ft_strlen(str)] == ' ' || s1[ft_strlen(str)] == '\t' || p == 0)
-			return (1);
-	return (0);
 }

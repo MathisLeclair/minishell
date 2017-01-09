@@ -6,24 +6,11 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 18:37:22 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:17:06 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_env(t_env *env)
-{
-	int i;
-
-	i = 0;
-	while (env->ev[i])
-	{
-		ft_putstr(env->ev[i]);
-		ft_putchar('\n');
-		++i;
-	}
-}
 
 int		find_param_env(t_env *env, char *str)
 {
