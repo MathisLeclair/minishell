@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 15:13:25 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:16:05 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	suppr_var_env(t_env *env, char *str)
 {
 	int i;
 	int j;
+	int len;
 
 	i = 0;
 	len = ft_strlen(str);
