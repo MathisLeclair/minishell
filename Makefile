@@ -20,7 +20,8 @@ FILE =	main \
 		cmd \
 		error \
 		ft_cmpspec \
-		env_mod
+		env_mod \
+		get_next_line
 
 OBJ  := $(addsuffix .o, $(FILE))
 

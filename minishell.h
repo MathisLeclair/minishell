@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 16:07:13 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:06:10 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct	s_env
 	char **ev;
 	char *dir;
 }				t_env;
+
+/*
+**getnextline
+*/
+# define BUFF_SIZE 32
+
+int	get_next_line(const int fd, char **line);
 
 /*
 ** ft_cmpspec.c
