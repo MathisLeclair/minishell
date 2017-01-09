@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 19:20:44 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:24:01 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,15 @@ t_env		*env(void)
 
 int main(int ac, char **av, char **ev)
 {
-	char *buf;
 	t_env *envi;
 
 	envi = env();
 	set_env(env(), ev);
-	buf = malloc(512);
 	signal(SIGINT, exit);
 	signal(SIGQUIT, exit);
 	signal(SIGTERM, exit);
 	(void)av;
 	(void)ac;
-	// (void)ev;
 	ft_printf("%s%s %s%s", "\e[0;32m",envi->dir, PROMPT, "\e[0m");
 	while (1)
 	{
