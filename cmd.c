@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 17:06:23 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 17:08:20 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_cd(char *inp, t_env *env)
 		++inp;
 	if (!inp[i])
 	{
-		if (chdir("/") == -1)
+		if (chdir("~") == -1)
 			error(-1, NULL);
 		getcwd(env->dir, 512);
 		return ;
