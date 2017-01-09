@@ -21,7 +21,8 @@ FILE =	main \
 		error \
 		ft_cmpspec \
 		env_mod \
-		get_next_line
+		get_next_line \
+		print
 
 OBJ  := $(addsuffix .o, $(FILE))
 

@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 19:16:28 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 20:02:56 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**ft_split_input(char *input)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = -1;
+	while (input[i])
+	{
+		if (input[i] == ' ' || input[i] == '\t')
+			++i;
+		else
+		{
+			if (i == 0)
+				input[++j] = input[i];
+			else if (input[i - 1] == ' ' || input[i - 1] == '\t')
+			{
+				input[++j] = ' ';
+				input[++j] = input[i];
+			}
+			else
+				input[++j] = input[i];
+			++i;
+		}
+	}
+	input[++j] = 0;
+	return(ft_strsplit(input, ' '));
+}
 
 int		ft_read(t_env *env)
 {
@@ -60,14 +89,25 @@ void	ft_cd(char *inp, t_env *env)
 
 void	ft_reco_cmd(char *input, t_env *env)
 {
+	char	**split;
+	int		i;
+
+	split = ft_split_input(input);
+	i = 0;
 	if (ft_cmpspec(input, "cd", 0) == 1)
 		ft_cd(input + 2, env);
 	else if (ft_cmpspec(input, "echo", 0) == 1)
 		ft_echo(input + 4);
 	else if (ft_cmpspec(input, "setenv", 1) == 1)
-		add_var_to_env(env, input + 6);
+	{
+		while (split[++i])
+			add_var_to_env(env, split[i]);
+	}
 	else if (ft_cmpspec(input, "unsetenv", 1) == 1)
-		suppr_var_env(env, input + 8);
+	{
+		while (split[++i])
+			suppr_var_env(env, split[i]);
+	}
 	else if (ft_cmpspec(input, "env", 0) == 1)
 		print_env(env);
 	else if (*input == '\n')

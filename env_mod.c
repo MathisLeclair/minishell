@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 19:17:06 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/09 20:16:26 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@ int		find_param_env(t_env *env, char *str)
 {
 	int i;
 	int j;
-	int len;
 
 	i = 0;
-	len = ft_strlen(str);
 	while (env->ev[i])
 	{
 		j = 0;
-		while (str[j] && str[j] == env->ev[i][j])
+		while (str[j] && str[j] != '=' && str[j] == env->ev[i][j])
 			j++;
-		if (j == len && env->ev[i][j + 1] == '=')
+		if (env->ev[i][j] == '=')
 			break ;
 		++i;
 	}
@@ -36,22 +34,9 @@ int		find_param_env(t_env *env, char *str)
 
 void	modif_var_env(t_env *env, char *str, int i)
 {
-	int		k;
-	int		j;
 	char	*new_para;
 
-	j = 0;
-	while (env->ev[i][j] != '=')
-		++j;
-	new_para = malloc(ft_strlen(str) + j + 2);
-	j = -1;
-	while (env->ev[i][++j] != '=')
-		new_para[j] = env->ev[i][j];
-	new_para[j] = '=';
-	k = -1;
-	while (str[++k])
-		new_para[j + k + 1] = str[k];
-	new_para[j + k + 1] = 0;
+	new_para = ft_strdup(str);
 	free(env->ev[i]);
 	env->ev[i] = new_para;
 }

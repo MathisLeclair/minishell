@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 19:16:35 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:45:16 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ void			error(int i, char *str);
 
 void			add_var_to_env(t_env *env, char *str);
 void			suppr_var_env(t_env *env, char *str);
+
+/*
+**print.c
+*/
 void			print_env(t_env *env);
 
 #endif
