@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 18:18:01 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/10 18:41:19 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,6 @@ void	error(int i, char *str)
 		ft_putstr("No such file or directory\n");
 	if (i == -2)
 		ft_printf("shell: command not found : %s\n", str);
+	if (i == -3)
+		ft_printf("shell error\n");
 }

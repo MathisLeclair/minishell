@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 21:38:09 by mleclair          #+#    #+#             */
-/*   Updated: 2016/11/07 11:39:48 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/10 21:06:27 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static int	ft_cnt_parts(const char *s, char c)
 
 	i = 0;
 	nw = 0;
-	while (s[i++])
-		if ((s[i - 1] == c || nw == 0) && s[i] != c && s[i] != '\0')
+	while (s[i])
+	{
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
 			nw++;
+		++i;
+	}
 	return (nw);
 }
 

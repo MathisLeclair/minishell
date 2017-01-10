@@ -6,27 +6,11 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 14:09:29 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/10 21:39:21 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	set_env(t_env *env, char **ev)
-{
-	int i;
-
-	i = 0;
-	env->input = NULL;
-	while (ev[i])
-		++i;
-	env->ev = malloc(sizeof(char *) * (i + 1));
-	env->ev[i] = 0;
-	while (i--)
-		env->ev[i] = ft_strdup(ev[i]);
-	env->dir = malloc(INPUT_SIZE);
-	getcwd(env->dir, 512);
-}
 
 t_env		*env(void)
 {

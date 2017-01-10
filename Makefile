@@ -23,7 +23,9 @@ FILE =	main \
 		env_mod \
 		get_next_line \
 		print \
-		ft_dollar
+		ft_dollar \
+		set_env \
+		fork
 
 OBJ  := $(addsuffix .o, $(FILE))
 

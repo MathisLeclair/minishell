@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 13:59:21 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/10 22:03:56 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,21 @@ char	**ft_split_input(char *input)
 			++i;
 		}
 	}
-	input[++j] = 0;
+	input[j + 1] = 0;
 	return(ft_strsplit(input, ' '));
 }
 
 int		ft_read(t_env *env)
 {
-	env->input = malloc(INPUT_SIZE);
-	*env->input = '\0';
-	if(get_next_line(1, &env->input) == 0)
+	char *input;
+
+	if(get_next_line(1, &input) == 0)
 		error(1, NULL);
-	if (*env->input != '\0')
+	if (*input != '\0')
 	{
+		env->input = input;
 		ft_dollar(env);
-		ft_reco_cmd(env->input, env);
+		ft_reco_cmd(input, env);
 	}
 	env->input[0] = '\0';
 	ft_printf("%s%s %s%s", "\e[0;32m", env->dir, PROMPT, "\e[0m");
@@ -81,14 +82,17 @@ void	ft_cd(char *inp, t_env *env)
 	{
 		if (chdir("/") == -1)
 			error(-1, NULL);
-		getcwd(env->dir, 512);
+		getcwd(env->dir, INPUT_SIZE);
 		return ;
 	}
 	if (inp[ft_strlen(inp) - 1] == '\n')
 		inp[ft_strlen(inp) - 1] = '\0';
 	if (chdir(inp) == -1)
 		error(-1, NULL);
-	getcwd(env->dir, 512);
+	getcwd(env->dir, INPUT_SIZE);
+	set_oldpwd(env);
+	set_pwd(env);
+
 }
 
 void	ft_reco_cmd(char *input, t_env *env)
@@ -117,5 +121,5 @@ void	ft_reco_cmd(char *input, t_env *env)
 	else if (*input == '\n')
 		return ;
 	else
-		error(-2, input);
+		ft_fork(env, split);
 }

@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 13:42:34 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/10 18:53:27 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,21 @@
 # include <unistd.h>
 # include <dirent.h>
 # define INPUT_SIZE 4096
+# define BUFF_SIZE 32
 
 typedef struct	s_env
 {
 	char *input;
 	char **ev;
 	char *dir;
+	char **path;
 }				t_env;
 
 /*
 **getnextline
 */
-# define BUFF_SIZE 32
 
-int	get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line);
 
 /*
 ** ft_cmpspec.c
@@ -64,12 +65,26 @@ void			suppr_var_env(t_env *env, char *str);
 /*
 **print.c
 */
+
 void			print_env(t_env *env);
 
 /*
 **ft_dollar.c
 */
 
-void	ft_dollar(t_env *env);
+void			ft_dollar(t_env *env);
 
+/*
+**set_env.c
+*/
+
+void			set_pwd(t_env *env);
+void			set_oldpwd(t_env *env);
+void			set_env(t_env *env, char **ev);
+
+/*
+**fork.c
+*/
+
+void			ft_fork(t_env *env, char **input);
 #endif
