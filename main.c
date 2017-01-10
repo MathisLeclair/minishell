@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 19:24:01 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/10 13:35:45 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_env(t_env *env, char **ev)
 	env->ev[i] = 0;
 	while (i--)
 		env->ev[i] = ft_strdup(ev[i]);
-	env->dir = malloc(4096);
+	env->dir = malloc(INPUT_SIZE);
 	getcwd(env->dir, 512);
 }
 

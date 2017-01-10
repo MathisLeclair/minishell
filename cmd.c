@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 20:02:56 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/10 13:40:13 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int		ft_read(t_env *env)
 	if(get_next_line(1, &env->input) == 0)
 		error(1, NULL);
 	if (*env->input != '\0')
+	{
+		ft_dollar(env);
 		ft_reco_cmd(env->input, env);
+	}
 	env->input[0] = '\0';
 	ft_printf("%s%s %s%s", "\e[0;32m", env->dir, PROMPT, "\e[0m");
 	return (0);
