@@ -22,7 +22,8 @@ FILE =	main \
 		ft_cmpspec \
 		env_mod \
 		get_next_line \
-		print
+		print \
+		ft_dollar
 
 OBJ  := $(addsuffix .o, $(FILE))
 

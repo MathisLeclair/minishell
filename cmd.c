@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 13:40:13 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/10 13:59:21 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_echo(char *input)
 	if (!input)
 		ft_putchar('\n');
 	ft_putstr(input);
+	ft_putchar('\n');
 }
 
 void	ft_cd(char *inp, t_env *env)
