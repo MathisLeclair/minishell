@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 18:18:02 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 20:30:39 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		main(int ac, char **av, char **ev)
 	(void)av;
 	(void)ac;
 	shlvl(env());
-	ft_printf("%s%s %s%s", "\e[0;32m", envi->dir, PROMPT, "\e[0m");
+	ft_printf("\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s", L'✈', envi->dir, PROMPT);
 	while (1)
 	{
 		if ((ft_read(env())) == 0)
