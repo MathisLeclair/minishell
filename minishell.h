@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 19:25:04 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:58:17 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void			ft_dollar(t_env *env);
 */
 
 void			set_pwd(t_env *env);
-void			set_oldpwd(t_env *env);
+void			set_oldpwd(t_env *env, char *str);
 void			set_env(t_env *env, char **ev);
 
 /*

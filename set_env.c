@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:47:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 19:33:15 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 20:03:44 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	getpwd(char *pwd)
 	getcwd(pwd + 4, INPUT_SIZE);
 }
 
-void	set_oldpwd(t_env *env)
+void	set_oldpwd(t_env *env, char *str)
 {
 	char	oldpwd[INPUT_SIZE + 7];
 
@@ -32,7 +32,8 @@ void	set_oldpwd(t_env *env)
 	oldpwd[4] = 'W';
 	oldpwd[5] = 'D';
 	oldpwd[6] = '=';
-	getcwd(oldpwd + 7, INPUT_SIZE);
+	oldpwd[7] = '\0';
+	ft_strcat(oldpwd, str + 4);
 	add_var_to_env(env, oldpwd);
 }
 

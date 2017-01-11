@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 19:34:31 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 20:07:49 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void	ft_cd(char *inp, t_env *env)
 {
 	int		i;
 	char	pwd[INPUT_SIZE + 4];
+	char	sav[INPUT_SIZE];
 
+	getpwd(sav);
 	i = 0;
 	while (inp[i] && (inp[i] == ' ' || inp[i] == '\t' || inp[i] == '\n'))
 		++inp;
@@ -90,11 +92,12 @@ void	ft_cd(char *inp, t_env *env)
 		inp[ft_strlen(inp) - 1] = '\0';
 	if (chdir(inp) == -1)
 		error(-1, NULL);
-	set_oldpwd(env);
+	if (chdir(inp) == -1)
+		return ;
+	set_oldpwd(env, sav);
 	getcwd(env->dir, INPUT_SIZE);
 	getpwd(pwd);
 	add_var_to_env(env, pwd);
-
 }
 
 void	ft_reco_cmd(char *input, t_env *env)
