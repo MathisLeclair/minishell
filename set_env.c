@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:47:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 21:34:38 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:04:36 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,10 @@ void	set_env(t_env *env, char **ev)
 	while (ev[i])
 		++i;
 	env->ev = malloc(sizeof(char *) * (i + 1));
-	printf("ev = %p\n", env->ev);
 	env->ev[i] = 0;
 	while (i--)
-	{
 		env->ev[i] = ft_strdup(ev[i]);
-		printf("env-ev[%d] = %p\n", i, env->ev[i]);
-	}
 	env->dir = malloc(INPUT_SIZE);
-	printf("env->dir = %p\n", env->dir);
 	getcwd(env->dir, INPUT_SIZE);
 	if (find_param_env(env, "PWD") == -1)
 		set_pwd(env);

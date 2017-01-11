@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 22:03:56 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 15:40:05 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		ft_read(t_env *env)
 		ft_dollar(env);
 		ft_reco_cmd(input, env);
 	}
-	env->input[0] = '\0';
+	(env->input)[0] = '\0';
 	ft_printf("%s%s %s%s", "\e[0;32m", env->dir, PROMPT, "\e[0m");
 	return (0);
 }
@@ -63,6 +63,7 @@ void	ft_echo(char *input)
 	int		i;
 
 	i = 0;
+	printf("input = %s\n", input);
 	while (input[i] == ' ' || input[i] == '\t')
 		++input;
 	if (!input)

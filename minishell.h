@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 18:53:27 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 18:50:59 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <signal.h>
 # include <unistd.h>
 # include <dirent.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # define INPUT_SIZE 4096
 # define BUFF_SIZE 32
 
@@ -87,4 +89,5 @@ void			set_env(t_env *env, char **ev);
 */
 
 void			ft_fork(t_env *env, char **input);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 21:38:09 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 21:06:27 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:17:02 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char		**ft_strsplit(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	nbw = ft_cnt_parts((const char *)s, c);
-	a = (char **)malloc(sizeof(*a) * (ft_cnt_parts((const char *)s, c) + 1));
+	a = malloc(sizeof(char *) * (ft_cnt_parts((const char *)s, c) + 1));
 	if (a == NULL)
 		return (NULL);
 	while (nbw--)

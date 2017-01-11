@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 18:41:19 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:01:56 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ void	error(int i, char *str)
 {
 	if (i == 1)
 		exit(0);
-	if (i == -1)
+	else if (i == -1)
 		ft_putstr("No such file or directory\n");
-	if (i == -2)
+	else if (i == -2)
 		ft_printf("shell: command not found : %s\n", str);
-	if (i == -3)
+	else if (i == -3)
 		ft_printf("shell error\n");
+	else if (i == -4)
+		ft_printf("shell: exec format error: %s\n", str);
+	else if (i == -5)
+		ft_printf("shell: permission denied: %s\n", str);
 }

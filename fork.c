@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 21:51:20 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:01:38 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	ft_fork(t_env *env, char **input)
 	int		status;
 	char	*tmp;
 	char	*tmp2;
+	int		t;
+	struct stat buf[INPUT_SIZE];
 
+	t = 0;
 	i = fork();
 	if (i == 0)
 	{
@@ -29,13 +32,25 @@ void	ft_fork(t_env *env, char **input)
 		while (env->path[i])
 		{
 			tmp = ft_strjoin(env->path[i], "/");
-			printf("tmp = %p\n", tmp);
 			tmp2 = ft_strjoin(tmp, *input);
-			printf("tmp2 = %p\n", tmp2);
 			execve(tmp2, input, env->ev);
 			free(tmp);
 			free(tmp2);
 			++i;
+		}
+		if (ft_cmpspec(*input, "./", 0) == 1)
+		{
+			i = find_param_env(env, "PWD");
+			tmp = ft_strjoin(env->ev[i] + 4, *input + 1);
+			i = execve(tmp, input, env->ev);
+			if (lstat(tmp, buf) == -1)
+				error(-1, NULL);
+			else if (!(buf->st_mode & S_IXUSR) || !(buf->st_mode & S_IROTH))
+				error(-5, *input);
+			else
+				error(-4, *input);
+			free(tmp);
+			exit(0);
 		}
 		error(-2, *input);
 		exit(0);
