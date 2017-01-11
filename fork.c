@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 19:01:38 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:25:10 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@ void	ft_fork(t_env *env, char **input)
 	char	*tmp2;
 	int		t;
 	struct stat buf[INPUT_SIZE];
+	char	pwd[INPUT_SIZE + 4];
 
+	getpwd(pwd);
 	t = 0;
 	i = fork();
 	if (i == 0)
 	{
-		i = find_param_env(env, "PATH");
+		if ((i = find_param_env(env, "PATH")) == -1)
+		{
+			error(-2, *input);
+			exit(0);
+		}
 		env->path = ft_strsplit(env->ev[i] + 5, ':');
 		i = 0;
 		while (env->path[i])
@@ -40,8 +46,7 @@ void	ft_fork(t_env *env, char **input)
 		}
 		if (ft_cmpspec(*input, "./", 0) == 1)
 		{
-			i = find_param_env(env, "PWD");
-			tmp = ft_strjoin(env->ev[i] + 4, *input + 1);
+			tmp = ft_strjoin(pwd + 4, *input + 1);
 			i = execve(tmp, input, env->ev);
 			if (lstat(tmp, buf) == -1)
 				error(-1, NULL);

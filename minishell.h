@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 18:50:59 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:25:04 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,11 @@ void			set_env(t_env *env, char **ev);
 */
 
 void			ft_fork(t_env *env, char **input);
+
+/*
+**setenv.c
+*/
+
+void			getpwd(char *pwd);
 
 #endif

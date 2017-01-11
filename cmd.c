@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 15:40:05 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:34:31 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_echo(char *input)
 	int		i;
 
 	i = 0;
-	printf("input = %s\n", input);
 	while (input[i] == ' ' || input[i] == '\t')
 		++input;
 	if (!input)
@@ -75,6 +74,7 @@ void	ft_echo(char *input)
 void	ft_cd(char *inp, t_env *env)
 {
 	int		i;
+	char	pwd[INPUT_SIZE + 4];
 
 	i = 0;
 	while (inp[i] && (inp[i] == ' ' || inp[i] == '\t' || inp[i] == '\n'))
@@ -90,9 +90,10 @@ void	ft_cd(char *inp, t_env *env)
 		inp[ft_strlen(inp) - 1] = '\0';
 	if (chdir(inp) == -1)
 		error(-1, NULL);
-	getcwd(env->dir, INPUT_SIZE);
 	set_oldpwd(env);
-	set_pwd(env);
+	getcwd(env->dir, INPUT_SIZE);
+	getpwd(pwd);
+	add_var_to_env(env, pwd);
 
 }
 
