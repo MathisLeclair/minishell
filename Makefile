@@ -22,7 +22,7 @@ FILE =	main \
 		ft_cmpspec \
 		env_mod \
 		get_next_line \
-		print \
+		cmd_env \
 		ft_dollar \
 		set_env \
 		fork

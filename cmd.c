@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 20:36:02 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 11:18:19 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int		ft_read(t_env *env)
 		ft_dollar(env);
 		ft_reco_cmd(input, env);
 	}
-	(env->input)[0] = '\0';
+	if (env->input)
+		(env->input)[0] = '\0';
 	ft_printf("\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s", L'✈', env->dir, PROMPT);
 	return (0);
 }
@@ -110,7 +111,7 @@ void	ft_reco_cmd(char *input, t_env *env)
 	if (ft_cmpspec(input, "cd", 0) == 1)
 		ft_cd(input + 2, env);
 	else if (ft_cmpspec(input, "echo", 0) == 1)
-		ft_echo(input + 4);
+		ft_echo(env->input + 4);
 	else if (ft_cmpspec(input, "setenv", 1) == 1)
 	{
 		while (split[++i])
@@ -122,7 +123,7 @@ void	ft_reco_cmd(char *input, t_env *env)
 			suppr_var_env(env, split[i]);
 	}
 	else if (ft_cmpspec(input, "env", 0) == 1)
-		print_env(env);
+		reco_env(env, input);
 	else if (*input == '\n')
 		return ;
 	else
