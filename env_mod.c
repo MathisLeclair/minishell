@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 10:47:29 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 15:03:01 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int		find_param_env(t_env *env, char *str)
 		j = 0;
 		while (str[j] && str[j] != '=' && str[j] == env->ev[i][j])
 			j++;
-		if (env->ev[i][j] == '=')
+		if (str[j] == '=' || str[j] == 0)
 			break ;
 		++i;
 	}
-	if (env->ev[i])
+	if (env->ev[i] && env->ev[i][j] == '=')
 		return (i);
 	return(-1);
 }
@@ -35,31 +35,45 @@ int		find_param_env(t_env *env, char *str)
 void	modif_var_env(t_env *env, char *str, int i)
 {
 	char	*new_para;
+	int		j;
 
-	new_para = ft_strdup(str);
-	free(env->ev[i]);
-	env->ev[i] = new_para;
+	j = 0;
+	while (str[j] && str[j] != '=')
+		++j;
+	if (j != 0 && str[j] && str[j + 1])
+	{
+		new_para = ft_strdup(str);
+		free(env->ev[i]);
+		env->ev[i] = new_para;
+	}
 }
 
 void	add_var_to_env(t_env *env, char *str)
 {
 	int		i;
+	int		j;
 	char	**new_env;
 
 	i = find_param_env(env, str);
 	if (i == -1)
 	{
-		i = 0;
-		while (env->ev[i])
-			++i;
-		new_env = malloc(sizeof(char *) * (i + 2));
-		new_env[i + 1] = 0;
-		i = -1;
-		while (env->ev[++i])
-			new_env[i] = env->ev[i];
-		new_env[i] = ft_strdup(str);
-		free(env->ev);
-		env->ev = new_env;
+		j = 0;
+		while (str[j] && str[j] != '=')
+			++j;
+		if (j != 0 && str[j] && str[j + 1])
+		{
+			i = 0;
+			while (env->ev[i])
+				++i;
+			new_env = malloc(sizeof(char *) * (i + 2));
+			new_env[i + 1] = 0;
+			i = -1;
+			while (env->ev[++i])
+				new_env[i] = env->ev[i];
+			new_env[i] = ft_strdup(str);
+			free(env->ev);
+			env->ev = new_env;
+		}
 	}
 	else
 		modif_var_env(env, str, i);

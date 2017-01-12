@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 10:58:14 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 18:15:43 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 
 typedef struct	s_env
 {
-	char *input;
-	char **ev;
-	char *dir;
-	char **path;
+	char	*input;
+	char	**ev;
+	char	*dir;
+	char	**path;
+	int		i;
 }				t_env;
 
 /*
@@ -41,7 +42,7 @@ int				get_next_line(const int fd, char **line);
 ** ft_cmpspec.c
 */
 
-int				ft_cmpspec(char *s1, char *str, int k);
+int				ft_cmpspec(char *s1, char *str);
 
 /*
 **cmd.c
@@ -75,13 +76,12 @@ void			reco_env(t_env *env, char *input);
 **ft_dollar.c
 */
 
-void			ft_dollar(t_env *env);
+void			ft_dollar(t_env *env, int i);
 
 /*
 **set_env.c
 */
 
-void			set_pwd(t_env *env);
 void			set_oldpwd(t_env *env, char *str);
 void			set_env(t_env *env, char **ev);
 

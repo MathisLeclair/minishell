@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/11 19:25:10 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 17:43:59 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_fork(t_env *env, char **input)
 	getpwd(pwd);
 	t = 0;
 	i = fork();
+	env->i = i;
 	if (i == 0)
 	{
 		if ((i = find_param_env(env, "PATH")) == -1)
@@ -61,6 +62,9 @@ void	ft_fork(t_env *env, char **input)
 		exit(0);
 	}
 	else
+	{
 		if (wait(&status) == -1)
 			error(-3, NULL);
+		env->i = 0;
+	}
 }

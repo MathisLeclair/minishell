@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 10:46:21 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 17:43:21 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,26 @@ t_env	*env(void)
 	return (env);
 }
 
+void	ft_hello(int i)
+{
+	i = 42;
+	if (env()->i == 0)
+	{
+		write(1, "\n", 1);
+		exit(0);
+	}
+	else
+		env()->i = 0;
+}
+
 int		main(int ac, char **av, char **ev)
 {
 	t_env *envi;
 
 	envi = env();
 	set_env(env(), ev);
-	signal(SIGINT, exit);
-	signal(SIGQUIT, exit);
-	signal(SIGTERM, exit);
+	signal(SIGINT, ft_hello);
+	signal(SIGCONT, ft_hello);
 	(void)av;
 	(void)ac;
 	shlvl(env());

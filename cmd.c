@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 11:18:19 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 18:31:03 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int		ft_read(t_env *env)
 	char *input;
 
 	if(get_next_line(1, &input) == 0)
-		error(1, NULL);
+		error(-6, NULL);
 	if (*input != '\0')
 	{
 		env->input = input;
-		ft_dollar(env);
-		ft_reco_cmd(input, env);
+		ft_dollar(env, -1);
+		ft_reco_cmd(env->input, env);
 	}
 	if (env->input)
 		(env->input)[0] = '\0';
@@ -61,10 +61,7 @@ int		ft_read(t_env *env)
 
 void	ft_echo(char *input)
 {
-	int		i;
-
-	i = 0;
-	while (input[i] == ' ' || input[i] == '\t')
+	while (input[0] == ' ' || input[0] == '\t')
 		++input;
 	if (!input)
 		ft_putchar('\n');
@@ -74,31 +71,31 @@ void	ft_echo(char *input)
 
 void	ft_cd(char *inp, t_env *env)
 {
-	int		i;
-	char	pwd[INPUT_SIZE + 4];
-	char	sav[INPUT_SIZE];
+	char pwd[INPUT_SIZE + 5];
+	size_t i;
 
-	getpwd(sav);
-	i = 0;
-	while (inp[i] && (inp[i] == ' ' || inp[i] == '\t' || inp[i] == '\n'))
-		++inp;
-	if (!inp[i])
+	if (!*inp)
 	{
 		if (chdir("/") == -1)
+		{
 			error(-1, NULL);
-		getcwd(env->dir, INPUT_SIZE);
-		return ;
+			return ;
+		}
 	}
-	if (inp[ft_strlen(inp) - 1] == '\n')
-		inp[ft_strlen(inp) - 1] = '\0';
-	if (chdir(inp) == -1)
-		error(-1, NULL);
-	if (chdir(inp) == -1)
-		return ;
-	set_oldpwd(env, sav);
-	getcwd(env->dir, INPUT_SIZE);
+	else
+		if (chdir(inp + 1) == -1)
+		{
+			error(-1, NULL);
+			return ;
+		}
+	set_oldpwd(env, env->ev[find_param_env(env, "PWD")]);
 	getpwd(pwd);
 	add_var_to_env(env, pwd);
+	env->dir = ft_strdup(pwd);
+	i = ft_strlen(pwd);
+	while (pwd[i] != '/' && pwd[i] != '=')
+		--i;
+	env->dir = ft_strdup(pwd + i + 1);
 }
 
 void	ft_reco_cmd(char *input, t_env *env)
@@ -108,21 +105,21 @@ void	ft_reco_cmd(char *input, t_env *env)
 
 	split = ft_split_input(input);
 	i = 0;
-	if (ft_cmpspec(input, "cd", 0) == 1)
+	if (ft_cmpspec(input, "cd") == 1)
 		ft_cd(input + 2, env);
-	else if (ft_cmpspec(input, "echo", 0) == 1)
+	else if (ft_cmpspec(input, "echo") == 1)
 		ft_echo(env->input + 4);
-	else if (ft_cmpspec(input, "setenv", 1) == 1)
+	else if (ft_cmpspec(input, "setenv") == 1)
 	{
 		while (split[++i])
 			add_var_to_env(env, split[i]);
 	}
-	else if (ft_cmpspec(input, "unsetenv", 1) == 1)
+	else if (ft_cmpspec(input, "unsetenv") == 1)
 	{
 		while (split[++i])
 			suppr_var_env(env, split[i]);
 	}
-	else if (ft_cmpspec(input, "env", 0) == 1)
+	else if (ft_cmpspec(input, "env") == 1)
 		reco_env(env, input);
 	else if (*input == '\n')
 		return ;

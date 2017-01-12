@@ -6,64 +6,70 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 10:42:38 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 15:27:48 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_replacestr(t_env *env, int ret, int sav)
+void	ft_replace(t_env *env, char *str, int sav, int i)
 {
-	char	*rez;
-	int		i;
-	int		u;
+	char *newinp;
 
-	i = 0;
-	u = 0;
-	rez = malloc(INPUT_SIZE * 2);
-	ft_bzero(rez, INPUT_SIZE * 2);
-	while (i < sav)
-	{
-		rez[i] = env->input[i];
-		++i;
-	}
-	while (env->ev[ret][u] != '=')
-		++u;
-	if (env->ev[ret][u + 1])
-		++u;
-	while (env->ev[ret][sav] != ' ' && env->ev[ret][sav] != '\t')
-		++sav;
-	ft_strcat(rez, env->ev[ret] + u);
-	ft_strcat(rez, env->input + sav);
+	newinp = malloc(ft_strlen(env->input) + ft_strlen(str));
+	newinp[0] = 0;
+	ft_strlcat(newinp, env->input, sav + 1);
+	ft_strcat(newinp, str);
+	ft_strcat(newinp, env->input + i);
 	free(env->input);
-	env->input = rez;
+	env->input = newinp;
 }
 
-void	ft_dollar(t_env *env)
+int		ft_replacestr(t_env *env, int ret, int sav, int i)
 {
-	int		i;
+	char 	*str;
+	int		j;
+
+	if (ret == -1)
+		ft_replace(env, "", sav, i);
+	else
+	{
+		j = 0;
+		while (env->ev[ret][j] != '=')
+			++j;
+		str = ft_strdup(env->ev[ret] + j + 1);
+		ft_replace(env, str, sav, i);
+		free(str);
+		return(sav + ft_strlen(str) - 1);
+	}
+	return (sav - 1);
+}
+
+void	ft_dollar(t_env *e, int i)
+{
 	int		k;
 	int		sav;
 	char	*str;
 
 	str = malloc(INPUT_SIZE);
-	i = 0;
-	k = 0;
-	while (env->input[i])
+	while (++i != (int)ft_strlen(e->input))
 	{
-		if (env->input[i] == '$')
+		k = 0;
+		if (e->input[i] == '\'')
+			while(e->input[++i] != '\'')
+				;
+		if (e->input[i] == '$')
 		{
 			sav = i;
-			++i;
-			while (env->input[i] && env->input[i] != ' ' && env->input[i] != '\t')
+			while (e->input[++i] && e->input[i] != ' ' && e->input[i] != '\t'
+				&& e->input[i] != '\"' && e->input[i] != '\'')
 			{
-				str[k] = env->input[i];
-				++i;
+				str[k] = e->input[i];
 				++k;
 			}
 			str[k] = '\0';
-			ft_replacestr(env, find_param_env(env, str), sav);
+			i = ft_replacestr(e, find_param_env(e, str), sav, i);
 		}
-		++i;
 	}
+	free(str);
 }

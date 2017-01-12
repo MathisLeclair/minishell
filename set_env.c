@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:47:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 11:18:37 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/12 18:23:02 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void	set_oldpwd(t_env *env, char *str)
 
 void	set_env(t_env *env, char **ev)
 {
-	int		i;
+	size_t	i;
 	char	pwd[INPUT_SIZE + 4];
 
 	i = 0;
+	env->i = 0;
 	env->input = NULL;
 	env->path = NULL;
 	while (ev[i])
@@ -51,11 +52,11 @@ void	set_env(t_env *env, char **ev)
 	env->ev[i] = 0;
 	while (i--)
 		env->ev[i] = ft_strdup(ev[i]);
-	env->dir = malloc(INPUT_SIZE);
-	getcwd(env->dir, INPUT_SIZE);
+	getpwd(pwd);
 	if (find_param_env(env, "PWD") == -1)
-	{
-		getpwd(pwd);
 		add_var_to_env(env, pwd);
-	}
+	i = ft_strlen(pwd);
+	while (pwd[i] != '/' && pwd[i] != '=')
+		--i;
+	env->dir = ft_strdup(pwd + i + 1);
 }

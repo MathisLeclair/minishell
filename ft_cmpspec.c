@@ -3,32 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmpspec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:49:00 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/09 19:10:03 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/12 18:24:08 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_cmpspec(char *s1, char *str, int p)
+int		ft_cmpspec(char *input, char *tofind)
 {
-	int i;
-	int k;
+	size_t i;
+	size_t k;
 
 	i = 0;
 	k = 0;
-	while (str[i])
-	{
-		if (!s1[i])
-			return (-1);
-		if (str[i] == s1[i])
-			++k;
+	while (input[i] == ' ' || input[i] == '\t')
 		++i;
-	}
-	if (k == (int)ft_strlen(str))
-		if (s1[ft_strlen(str)] == ' ' || s1[ft_strlen(str)] == '\t' || p == 0)
-			return (1);
+	while (input[i + k] == tofind[k])
+		++k;
+	if (k == ft_strlen(tofind))
+		return (1);
 	return (0);
 }
