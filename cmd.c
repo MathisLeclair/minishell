@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 18:31:03 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/13 09:50:59 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_cd(char *inp, t_env *env)
 	i = ft_strlen(pwd);
 	while (pwd[i] != '/' && pwd[i] != '=')
 		--i;
-	env->dir = ft_strdup(pwd + i + 1);
+	env->dir = ft_strdup((pwd[i + 1] == 0 ?  0 : 1) + pwd + i);
 }
 
 void	ft_reco_cmd(char *input, t_env *env)

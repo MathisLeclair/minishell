@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 17:43:59 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/13 09:41:30 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_fork(t_env *env, char **input)
 			free(tmp2);
 			++i;
 		}
-		if (ft_cmpspec(*input, "./", 0) == 1)
+		if (ft_cmpspec(*input, "./") == 1)
 		{
 			tmp = ft_strjoin(pwd + 4, *input + 1);
 			i = execve(tmp, input, env->ev);
