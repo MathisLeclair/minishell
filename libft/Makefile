@@ -6,13 +6,13 @@
 #    By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/12 19:21:21 by mleclair          #+#    #+#              #
-#    Updated: 2016/12/13 15:52:23 by mleclair         ###   ########.fr        #
+#    Updated: 2017/01/13 15:05:07 by mleclair         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-# PATH = ./
+PATH = ./sprintf/
 
 FILE =	ft_atoi \
 		ft_bzero \
@@ -86,7 +86,20 @@ FILE =	ft_atoi \
 		printf \
 		tableaupointeursurfonction \
 		opts1 \
-		opts2
+		opts2 \
+		$(PATH)ft_satoi_base\
+		$(PATH)ft_sisokay \
+		$(PATH)ft_sopts \
+		$(PATH)saddprint \
+		$(PATH)sconv \
+		$(PATH)sdiese \
+		$(PATH)sopts1 \
+		$(PATH)sopts2 \
+		$(PATH)spart1 \
+		$(PATH)spart2 \
+		$(PATH)spart3 \
+		$(PATH)sprintf \
+		$(PATH)stableaupointeursurfonction
 
 OBJ  := $(addsuffix .o, $(FILE))
 
