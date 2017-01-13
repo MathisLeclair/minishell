@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 15:43:37 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/13 15:46:03 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_split_input(char *input)
 				input[++j] = input[i];
 			else if (input[i - 1] == ' ' || input[i - 1] == '\t')
 			{
-				input[(j == 0 ? 0 : ++j)] = ' ';
+				input[(j == -1 ? 0 : ++j)] = ' ';
 				input[++j] = input[i];
 			}
 			else
