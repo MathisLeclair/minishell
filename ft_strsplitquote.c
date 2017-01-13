@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:58:49 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/13 17:25:09 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:14:56 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_wlen(const char *s, char c)
 
 	l = 0;
 	done = 0;
-	while ((*s != c || (*s == c && done != 0)) && *s != '\0')
+	while ((*s != c || (*s == c && done != 0)) && *s)
 	{
 		if ((*s == '\'' || *s == '"') && done == *s)
 			done = 0;

@@ -25,7 +25,8 @@ FILE =	main \
 		cmd_env \
 		ft_dollar \
 		set_env \
-		fork
+		fork \
+		ft_strsplitquote
 
 OBJ  := $(addsuffix .o, $(FILE))
 

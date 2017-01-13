@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 15:46:03 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:20:41 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,29 @@ char	**ft_split_input(char *input)
 {
 	int		i;
 	int		j;
+	char	newinp[ft_strlen(input)];
+	char	**a;
 
-	i = 0;
+	i = -1;
 	j = -1;
-	while (input[i])
+	while (input[++i])
+		if (input[i] != '\t' && ++j != -1)
+			newinp[j] = input[i];
+	newinp[j + 1] = 0;
+	a = ft_strsplitquote(newinp, ' ');
+	i = -1;
+	while (a[++i])
 	{
-		if (input[i] == ' ' || input[i] == '\t')
-			++i;
-		else
+		if ((a[i][0] == '\'' && a[i][ft_strlen(a[i]) - 1] == '\'') ||
+			(a[i][0] == '\"' && a[i][ft_strlen(a[i]) - 1] == '\"'))
 		{
-			if (i == 0)
-				input[++j] = input[i];
-			else if (input[i - 1] == ' ' || input[i - 1] == '\t')
-			{
-				input[(j == -1 ? 0 : ++j)] = ' ';
-				input[++j] = input[i];
-			}
-			else
-				input[++j] = input[i];
-			++i;
+			j = 0;
+			while (a[i][++j])
+				a[i][j - 1] = a[i][j];
+			a[i][ft_strlen(a[i]) - 2] = 0;
 		}
 	}
-	input[j + 1] = 0;
-	return(ft_strsplit(input, ' '));
+	return (a);
 }
 
 int		ft_read(t_env *env)
