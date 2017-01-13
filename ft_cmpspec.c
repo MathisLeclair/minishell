@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:49:00 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 18:24:08 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:32:13 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_cmpspec(char *input, char *tofind)
 	k = 0;
 	while (input[i] == ' ' || input[i] == '\t')
 		++i;
-	while (input[i + k] == tofind[k])
+	while (tofind[k] && input[i + k] == tofind[k])
 		++k;
 	if (k == ft_strlen(tofind))
 		return (1);
