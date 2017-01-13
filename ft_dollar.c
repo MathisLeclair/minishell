@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dollar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 18:38:22 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:44:05 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	ft_dollar(t_env *e, int i)
 	{
 		k = 0;
 		if (e->input[i] == '\'')
-			while(e->input[++i] && e->input[i] != '\'')
-				;
+			while(e->input[i + 1] && e->input[i + 1] != '\'')
+				++i;
 		if (e->input[i] == '$')
 		{
 			sav = i;
