@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 15:27:48 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:38:22 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_dollar(t_env *e, int i)
 	{
 		k = 0;
 		if (e->input[i] == '\'')
-			while(e->input[++i] != '\'')
+			while(e->input[++i] && e->input[i] != '\'')
 				;
 		if (e->input[i] == '$')
 		{
