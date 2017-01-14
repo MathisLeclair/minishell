@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 14:34:02 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/14 17:30:07 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	error(int i, char *str)
 		ft_printf("shell: exec format error: %s\n", str);
 	else if (i == -5)
 		ft_printf("shell: permission denied: %s\n", str);
-	else if(i == - 6)
+	else if(i == -6)
 	{
 		ft_putstr("exit\n");
 		exit(0);
 	}
+	else if (i == -7)
+		ft_putstr("shell: error too many arguments\n");
 }

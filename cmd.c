@@ -6,11 +6,40 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 18:35:11 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/14 18:08:39 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_suppr_quotes(char *str, int i, int j)
+{
+	char	quote;
+
+	quote = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			quote = str[i];
+			++i;
+			while (str[i] && str[i] != quote)
+			{
+				str[j] = str[i];
+				++j;
+				++i;
+			}
+			if (str[i] && str[i + 1])
+				++i;
+			else
+				break ;
+		}
+		str[j] = str[i];
+		++i;
+		++j;
+	}
+	str[j] = 0;
+}
 
 char	**ft_split_input(char *input)
 {
@@ -28,30 +57,28 @@ char	**ft_split_input(char *input)
 	a = ft_strsplitquote(newinp, ' ');
 	i = -1;
 	while (a[++i])
-	{
-		if ((a[i][0] == '\'' && a[i][ft_strlen(a[i]) - 1] == '\'') ||
-			(a[i][0] == '\"' && a[i][ft_strlen(a[i]) - 1] == '\"'))
-		{
-			j = 0;
-			while (a[i][++j])
-				a[i][j - 1] = a[i][j];
-			a[i][ft_strlen(a[i]) - 2] = 0;
-		}
-	}
+		ft_suppr_quotes(a[i], 0, 0);
 	return (a);
 }
 
 int		ft_read(t_env *env)
 {
 	char *input;
+	char **inputspl;
+	int i;
 
+	i = -1;
 	if(get_next_line(1, &input) == 0)
 		error(-6, NULL);
+	inputspl = ft_strsplitquote(input, ';');
 	if (*input != '\0')
 	{
-		env->input = input;
-		ft_dollar(env, -1);
-		ft_reco_cmd(env->input, env);
+		while (inputspl[++i])
+		{
+			env->input = inputspl[i];
+			ft_dollar(env, -1);
+			ft_reco_cmd(env);
+		}
 	}
 	if (env->input)
 		(env->input)[0] = '\0';
@@ -61,20 +88,38 @@ int		ft_read(t_env *env)
 
 void	ft_echo(char *input)
 {
-	while (input[0] == ' ' || input[0] == '\t')
-		++input;
-	if (!input)
-		ft_putchar('\n');
-	ft_putstr(input);
+	int i;
+
+	i = 0;
+	while (input[i] != 'o')
+		++i;
+	ft_suppr_quotes(input, 0, 0);
+	if (input[i + 1])
+		ft_putstr(input + i + 2);
 	ft_putchar('\n');
 }
 
-void	ft_cd(char *inp, t_env *env)
+void	ft_cd(char **split, t_env *env)
 {
 	char pwd[INPUT_SIZE + 5];
 	size_t i;
 
-	if (!*inp)
+	if (split[1] && split[2] && split[3])
+	{
+		error(-7, NULL);
+		return ;
+	}
+	else if (split[1] && split[2])
+		return ;
+	else if (split[1])
+	{
+		if (chdir(split[1]) == -1)
+		{
+			error(-1, NULL);
+			return ;
+		}
+	}
+	else
 	{
 		if (chdir("/") == -1)
 		{
@@ -82,12 +127,6 @@ void	ft_cd(char *inp, t_env *env)
 			return ;
 		}
 	}
-	else
-		if (chdir(inp + 1) == -1)
-		{
-			error(-1, NULL);
-			return ;
-		}
 	set_oldpwd(env, env->ev[find_param_env(env, "PWD")]);
 	getpwd(pwd);
 	add_var_to_env(env, pwd);
@@ -106,31 +145,27 @@ void	ft_reco_cmd2(char *input, t_env *env, char **split)
 		ft_fork(env, split);
 }
 
-void	ft_reco_cmd(char *input, t_env *env)
+void	ft_reco_cmd(t_env *env)
 {
 	char	**split;
 	int		i;
 
-	split = ft_split_input(input);
+	split = ft_split_input(env->input);
 	i = 0;
-	if (ft_cmpspec(input, "cd") == 1)
-		ft_cd(input + 2, env);
-	else if (ft_cmpspec(input, "echo") == 1)
-		ft_echo(env->input + 4);
-	else if (ft_cmpspec(input, "setenv") == 1)
-	{
+	if (ft_cmpspec(split[0], "cd") == 1)
+		ft_cd(split, env);
+	else if (ft_cmpspec(split[0], "echo") == 1)
+		ft_echo(env->input);
+	else if (ft_cmpspec(split[0], "setenv") == 1)
 		while (split[++i])
 			add_var_to_env(env, split[i]);
-	}
-	else if (ft_cmpspec(input, "unsetenv") == 1)
-	{
+	else if (ft_cmpspec(split[0], "unsetenv") == 1)
 		while (split[++i])
 			suppr_var_env(env, split[i]);
-	}
-	else if (ft_cmpspec(input, "env") == 1)
-		reco_env(env, input);
-	else if (*input == '\n')
+	else if (ft_cmpspec(split[0], "env") == 1)
+		reco_env(env, env->input);
+	else if (*env->input == '\n')
 		return ;
 	else
-		ft_reco_cmd2(input, env, split);
+		ft_reco_cmd2(env->input, env, split);
 }

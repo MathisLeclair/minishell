@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 17:43:06 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/14 17:22:14 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				ft_cmpspec(char *s1, char *str);
 **cmd.c
 */
 
-void			ft_reco_cmd(char *input, t_env *env);
+void			ft_reco_cmd(t_env *env);
 int				ft_read(t_env *env);
 
 /*
