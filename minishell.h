@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/15 15:59:50 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 17:25:22 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			suppr_var_env(t_env *env, char *str);
 */
 
 void			print_env(t_env *env);
-void			reco_env(t_env *env, char *input);
+void			reco_env(t_env *env, char **input, int i, int j);
 
 /*
 **ft_dollar.c

@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/15 15:54:55 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 17:25:57 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void	ft_reco_cmd(t_env *env)
 		while (split[++i])
 			suppr_var_env(env, split[i]);
 	else if (ft_cmpspec(split[0], "env") == 1)
-		reco_env(env, env->input);
+		reco_env(env, split, 0, 0);
 	else if (*env->input == '\n')
 		return ;
 	else

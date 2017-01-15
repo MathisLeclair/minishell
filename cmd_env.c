@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/15 15:12:36 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 17:56:24 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,32 +68,37 @@ void	print_env(t_env *env)
 	}
 }
 
-
-void	reco_env(t_env *env, char *input)
+void	reco_env(t_env *env, char **split, int j, int bool)
 {
-	int i;
-	int t;
-	char *str;
+	int 	i;
+	t_env	*envbis;
 
-	i = 0;
-	t = 0;
-	input += 4;
-	while (input[i])
+	envbis = malloc(sizeof(t_env));
+	set_env(envbis, env->ev);
+	if (split[1] && ft_cmpspec(split[1], "-i") == 1)
 	{
-		if (input[i] == '=')
-		{
-			while (input[i] && input[i] != ' ' && input[i] != '\t')
-				--i;
-			++i;
-			t = i + 1;
-			while (input[t] && input[t] != ' ' && input[t] != '\t')
-				++t;
-			str = pick_str(input, i, t);
-			input = remove_str(input, i, t);
-			add_var_to_env(env, str);
-			free(str);
-		}
-		++i;
+		++j;
+		envbis->ev = NULL;
 	}
-	print_env(env);
+	envbis->input = env->input;
+	while (split[++j])
+	{
+		bool = 0;
+		i = -1;
+		while (split[j][++i])
+			if (split[j][i] == '=')
+			{
+				add_var_to_env(envbis, split[1]);
+				bool = 1;
+			}
+		if (i == (int)ft_strlen(split[j]) && bool == 0)
+		{
+			envbis->input = ft_strstr(env->input, split[j - 1]) + ft_strlen(split[j - 1]);
+			ft_reco_cmd(envbis);
+			bool = 3;
+			break ;
+		}
+	}
+	if (bool != 3)
+		print_env(envbis);
 }
