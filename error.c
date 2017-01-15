@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/14 17:30:07 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 13:27:56 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	error(int i, char *str)
 		exit(0);
 	}
 	else if (i == -7)
-		ft_putstr("shell: error too many arguments\n");
+		ft_putstr("shell: error too many arguments.\n");
 }
