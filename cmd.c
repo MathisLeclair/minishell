@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/14 18:08:39 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 15:54:55 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,34 +99,50 @@ void	ft_echo(char *input)
 	ft_putchar('\n');
 }
 
-void	ft_cd(char **split, t_env *env)
+char	*ft_cd_regex(char **split, int k)
 {
 	char pwd[INPUT_SIZE + 5];
-	size_t i;
+	char *sav;
+	char *reg;
+
+	getpwd(pwd);
+	if (!(sav = ft_super_strstr(pwd + 4, split[1])))
+		error(-10, split[1]);
+	if (!sav)
+		return (NULL);
+	reg = malloc(ft_strlen(pwd + 4) + ft_strlen(split[2])
+	- ft_strlen(split[1]) + 1);
+	while (pwd + 4 + ++k < sav)
+		reg[k] = pwd[4 + k];
+	reg[k] = 0;
+	ft_strcat(reg + k, split[2]);
+	ft_strcat(reg + k, sav + ft_strlen(split[1]));
+	return (reg);
+}
+
+void	ft_cd(char **split, t_env *env, size_t i)
+{
+	char pwd[INPUT_SIZE + 5];
+	char *reg;
 
 	if (split[1] && split[2] && split[3])
-	{
-		error(-7, NULL);
-		return ;
-	}
+		return (error(-7, NULL));
 	else if (split[1] && split[2])
-		return ;
+	{
+		if (!(reg = ft_cd_regex(split, -1)))
+			return ;
+		if (chdir(reg) == -1)
+			return (error(-9, reg));
+		free(reg);
+	}
 	else if (split[1])
 	{
 		if (chdir(split[1]) == -1)
-		{
-			error(-1, NULL);
-			return ;
-		}
+			return (error(-1, NULL));
 	}
 	else
-	{
-		if (chdir("/") == -1)
-		{
-			error(-1, NULL);
-			return ;
-		}
-	}
+		if (chdir(env->ev[find_param_env(env, "HOME")] + 5) == -1)
+			return (error(-8, NULL));
 	set_oldpwd(env, env->ev[find_param_env(env, "PWD")]);
 	getpwd(pwd);
 	add_var_to_env(env, pwd);
@@ -153,7 +169,7 @@ void	ft_reco_cmd(t_env *env)
 	split = ft_split_input(env->input);
 	i = 0;
 	if (ft_cmpspec(split[0], "cd") == 1)
-		ft_cd(split, env);
+		ft_cd(split, env, 0);
 	else if (ft_cmpspec(split[0], "echo") == 1)
 		ft_echo(env->input);
 	else if (ft_cmpspec(split[0], "setenv") == 1)

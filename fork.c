@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 09:41:30 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/15 14:52:58 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	ft_fork(t_env *env, char **input)
 	{
 		if (wait(&status) == -1)
 			error(-3, NULL);
-		env->i = 0;
+		env->i = 1;
 	}
 }

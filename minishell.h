@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/14 17:22:14 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 15:59:50 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int				get_next_line(const int fd, char **line);
 */
 
 int				ft_cmpspec(char *s1, char *str);
+char			*ft_super_strstr(const char *str1, const char *str2);
 
 /*
 **cmd.c

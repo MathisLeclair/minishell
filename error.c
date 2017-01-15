@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/15 13:27:56 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 15:43:54 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,10 @@ void	error(int i, char *str)
 	}
 	else if (i == -7)
 		ft_putstr("shell: error too many arguments.\n");
+	else if (i == -8)
+		ft_putstr("shell: cd: HOME not set\n");
+	else if (i == -9)
+		ft_printf("shell: cd: no such file or directory: %s\n", str);
+	else if (i == -10)
+		ft_printf("shell: cd: string not in pwd: %s\n", str);
 }

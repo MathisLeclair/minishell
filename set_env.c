@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:47:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 09:51:31 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/15 14:42:01 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_env(t_env *env, char **ev)
 	char	pwd[INPUT_SIZE + 4];
 
 	i = 0;
-	env->i = 0;
+	env->i = 1;
 	env->input = NULL;
 	env->path = NULL;
 	while (ev[i])

@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/14 17:00:00 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 14:54:41 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ void	ft_hello(int i)
 {
 	i = 42;
 	if (env()->i == 0)
-	{
-		write(1, "\n", 1);
 		exit(0);
+	else if (env()->i == 1)
+	{
+		ft_printf("\n\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s",
+		L'✈', env()->dir, PROMPT);
+		env()->i = 1;
 	}
-	else
-		env()->i = 0;
 }
 
 #include <locale.h>

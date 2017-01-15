@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:49:00 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 18:32:13 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 16:10:09 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,31 @@ int		ft_cmpspec(char *input, char *tofind)
 	if (k == ft_strlen(tofind))
 		return (1);
 	return (0);
+}
+
+char	*ft_super_strstr(const char *str1, const char *str2)
+{
+	int i;
+	int str2l;
+	int k;
+	int sv;
+
+	i = 0;
+	str2l = ft_strlen(str2);
+	if (ft_strlen(str2) == 0)
+		return ((char *)str1);
+	while (str1[i])
+	{
+		k = 0;
+		sv = i;
+		while (str1[sv] == str2[k] && str2[k] != 0)
+		{
+			k++;
+			sv++;
+		}
+		if (k == str2l && (str1[k + i] == 0 || str1[k + i] == '/'))
+			return ((char *)str1 + i);
+		i++;
+	}
+	return (NULL);
 }

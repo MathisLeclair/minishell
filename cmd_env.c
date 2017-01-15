@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/12 18:02:44 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/15 15:12:36 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*remove_str(char *str, int start, int end)
 		++i;
 	}
 	tmp[i] = '\0';
-	// free(str);
+	free(str);
 	return (tmp);
 }
 
@@ -51,7 +51,7 @@ char	*pick_str(char *str, int start, int end)
 		++t;
 	}
 	tmp[t]= '\0';
-	// free(str);
+	free(str);
 	return (tmp);
 }
 
