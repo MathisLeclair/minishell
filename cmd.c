@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/15 17:25:57 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/16 14:24:08 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,18 @@ void	ft_cd(char **split, t_env *env, size_t i)
 	env->dir = ft_strdup((pwd[i + 1] == 0 ?  0 : 1) + pwd + i);
 }
 
+void	ft_exit()
+{
+	ft_putstr("exit\n");
+	exit(1);
+}
+
 void	ft_reco_cmd2(char *input, t_env *env, char **split)
 {
 	if (ft_cmpspec(input, "patate") == 1)
 			ft_putstr("[1]    35674 segmentation fault  ./minishell\n");
+	else if (ft_cmpspec(split[0], "exit") == 1)
+		ft_exit();
 	else
 		ft_fork(env, split);
 }

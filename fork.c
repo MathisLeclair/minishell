@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/15 14:52:58 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/16 11:00:51 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_fork(t_env *env, char **input)
 			error(-2, *input);
 			exit(0);
 		}
-		env->path = ft_strsplit(env->ev[i] + 5, ':');
+		if (env->ev[i])
+			env->path = ft_strsplit(env->ev[i] + 5, ':');
 		i = 0;
 		while (env->path[i])
 		{
