@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/16 14:24:08 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/16 16:55:43 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void	ft_reco_cmd(t_env *env)
 		while (split[++i])
 			suppr_var_env(env, split[i]);
 	else if (ft_cmpspec(split[0], "env") == 1)
-		reco_env(env, split, 0, 0);
+		reco_env(env, split, 0);
 	else if (*env->input == '\n')
 		return ;
 	else
