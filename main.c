@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/15 14:54:41 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/16 16:48:39 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	ft_hello(int i)
 		env()->i = 1;
 	}
 }
-
-#include <locale.h>
 
 int		main(int ac, char **av, char **ev)
 {
