@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/16 16:59:52 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/16 17:26:11 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,15 @@
 // 	return (tmp);
 // }
 
-void	print_env(t_env *env)
+void	print_split(char **split)
 {
 	int i;
 
-	i = 0;
-	while (env->ev[i])
+	i = -1;
+	while (split[++i])
 	{
-		ft_putstr(env->ev[i]);
+		ft_putstr(split[i]);
 		ft_putchar('\n');
-		++i;
 	}
 }
 
@@ -80,8 +79,8 @@ void	reco_env(t_env *env, char **split, int j)
 	{
 		j = 0;
 		while (split[i][++j])
-			if (j == 'i' && (c & 1) == 0)
-				c += 1;
+			if (split[i][j] == 'i')
+				c = 1;
 			else
 			{
 				ft_putstr("MAUVAISE OPTION. JE NE COMPRENDS QUE -i !\n");
@@ -90,7 +89,10 @@ void	reco_env(t_env *env, char **split, int j)
 	}
 	envbis = malloc(sizeof(t_env));
 	if (c == 1)
-		envbis->ev = NULL;
+	{
+		envbis->ev = malloc(sizeof(char **));
+		envbis->ev[0] = 0;
+	}
 	else
 		set_env(envbis, env->ev);
 	while (split[i])
@@ -102,12 +104,12 @@ void	reco_env(t_env *env, char **split, int j)
 			add_var_to_env(envbis, split[i]);
 		else
 		{
-			envbis->input = ft_strdup((*(ft_strstr(env->input, split[j - 1]) - 1) == '\'' || *(ft_strstr(env->input, split[j - 1]) - 1) == '"') ? ft_strstr(env->input, split[j - 1]) - 1 : ft_strstr(env->input, split[j - 1]));
+			envbis->input = ft_strdup((*(ft_strstr(env->input, split[i]) - 1) == '\'' || *(ft_strstr(env->input, split[i]) - 1) == '"') ? ft_strstr(env->input, split[i]) - 1 : ft_strstr(env->input, split[i]));
 			ft_reco_cmd(envbis);
 			break ;
 		}
 		++i;
 	}
 	if (!split[i])
-		print_env(envbis);
+		print_split(envbis->ev);
 }

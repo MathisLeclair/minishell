@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/16 16:55:52 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/16 17:10:38 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			suppr_var_env(t_env *env, char *str);
 **cmd_env.c
 */
 
-void			print_env(t_env *env);
+void			print_split(char **split);
 void			reco_env(t_env *env, char **input, int i);
 
 /*
