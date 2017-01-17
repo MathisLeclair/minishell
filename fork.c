@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/16 11:00:51 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 15:36:37 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ft_fork(t_env *env, char **input)
 		{
 			tmp = ft_strjoin(env->path[i], "/");
 			tmp2 = ft_strjoin(tmp, *input);
-			execve(tmp2, input, env->ev);
+			if(!execve(tmp2, input, env->ev))
+				execve("/", input, env->ev);
 			free(tmp);
 			free(tmp2);
 			++i;

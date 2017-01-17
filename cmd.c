@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/16 16:55:43 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 15:01:08 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,21 @@ int		ft_read(t_env *env)
 		error(-6, NULL);
 	inputspl = ft_strsplitquote(input, ';');
 	if (*input != '\0')
-	{
 		while (inputspl[++i])
 		{
 			env->input = inputspl[i];
 			ft_dollar(env, -1);
 			ft_reco_cmd(env);
 		}
-	}
 	if (env->input)
 		(env->input)[0] = '\0';
+	if (env->savev && (i = -1))
+		while (env->savev[++i])
+		{
+			free(env->ev[i]);
+			env->ev[i] = ft_strdup(env->savev[i]);
+			*env->savev = 0;
+		}
 	ft_printf("\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s", L'✈', env->dir, PROMPT);
 	return (0);
 }

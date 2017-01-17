@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/16 17:26:11 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 15:06:45 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ void	print_split(char **split)
 void	reco_env(t_env *env, char **split, int j)
 {
 	int 	i;
-	char	c;
-	t_env	*envbis;
+	int		c;
 
 	i = 0;
 	c = 0;
@@ -83,33 +82,30 @@ void	reco_env(t_env *env, char **split, int j)
 				c = 1;
 			else
 			{
-				ft_putstr("MAUVAISE OPTION. JE NE COMPRENDS QUE -i !\n");
+				ft_putstr("BAD OPTION. I ONLY TAKE -i YOU ARSEHOLE!\n");
 				return ;
 			}
 	}
-	envbis = malloc(sizeof(t_env));
-	if (c == 1)
+	if (c == 1 && (c = -1))
 	{
-		envbis->ev = malloc(sizeof(char **));
-		envbis->ev[0] = 0;
+		env->savev = malloc(sizeof(char **) * INPUT_SIZE);
+		while (env->ev[++c])
+			env->savev[c] = ft_strdup(env->ev[c]);
 	}
-	else
-		set_env(envbis, env->ev);
-	while (split[i])
+	while (split[i] && (j = -1))
 	{
-		j = -1;
 		while (split[i][++j] && split[i][j] != '=')
 			;
 		if (split[i][j] == '=')
-			add_var_to_env(envbis, split[i]);
+			add_var_to_env(env, split[i]);
 		else
 		{
-			envbis->input = ft_strdup((*(ft_strstr(env->input, split[i]) - 1) == '\'' || *(ft_strstr(env->input, split[i]) - 1) == '"') ? ft_strstr(env->input, split[i]) - 1 : ft_strstr(env->input, split[i]));
-			ft_reco_cmd(envbis);
+			env->input = ft_strdup((*(ft_strstr(env->input, split[i]) - 1) == '\'' || *(ft_strstr(env->input, split[i]) - 1) == '"') ? ft_strstr(env->input, split[i]) - 1 : ft_strstr(env->input, split[i]));
+			ft_reco_cmd(env);
 			break ;
 		}
 		++i;
 	}
 	if (!split[i])
-		print_split(envbis->ev);
+		print_split(env->ev);
 }
