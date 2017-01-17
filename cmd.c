@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:10:00 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 18:11:13 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,10 @@ void	ft_suppr_quotes(char *str, int i, int j)
 char	**ft_split_input(char *input)
 {
 	int		i;
-	int		j;
-	char	newinp[ft_strlen(input)];
 	char	**a;
 
 	i = -1;
-	j = -1;
-	while (input[++i])
-		if (input[i] != '\t' && ++j != -1)
-			newinp[j] = input[i];
-	newinp[j + 1] = 0;
-	a = ft_strsplitquote(newinp, ' ');
+	a = ft_strsplitquote(input, ' ');
 	i = -1;
 	while (a[++i])
 		ft_suppr_quotes(a[i], 0, 0);
