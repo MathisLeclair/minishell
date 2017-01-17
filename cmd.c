@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 17:13:16 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 18:10:00 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,9 @@ void	ft_exit()
 
 void	ft_reco_cmd2(char *input, t_env *env, char **split)
 {
-	if (ft_cmpspec(input, "patate") == 1)
+	if (ft_strcmp(input, "Patate") == 0)
 			ft_putstr("[1]    35674 segmentation fault  ./minishell\n");
-	else if (ft_cmpspec(split[0], "exit") == 1)
+	else if (ft_strcmp(split[0], "exit") == 0)
 		ft_exit();
 	else
 		ft_fork(env, split);
@@ -181,17 +181,17 @@ void	ft_reco_cmd(t_env *env)
 
 	split = ft_split_input(env->input);
 	i = 0;
-	if (ft_cmpspec(split[0], "cd") == 1)
+	if (ft_strcmp(split[0], "cd") == 0)
 		ft_cd(split, env, 0);
-	else if (ft_cmpspec(split[0], "echo") == 1)
+	else if (ft_strcmp(split[0], "echo") == 0)
 		ft_echo(env->input);
-	else if (ft_cmpspec(split[0], "setenv") == 1)
+	else if (ft_strcmp(split[0], "setenv") == 0)
 		while (split[++i])
 			add_var_to_env(env, split[i]);
-	else if (ft_cmpspec(split[0], "unsetenv") == 1)
+	else if (ft_strcmp(split[0], "unsetenv") == 0)
 		while (split[++i])
 			suppr_var_env(env, split[i]);
-	else if (ft_cmpspec(split[0], "env") == 1)
+	else if (ft_strcmp(split[0], "env") == 0)
 		reco_env(env, split, 0);
 	else if (*env->input == '\n')
 		return ;

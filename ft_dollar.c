@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 17:12:23 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 18:07:11 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,29 @@ void	ft_dollar(t_env *e, int i)
 	int		k;
 	int		sav;
 	char	*str;
+	char	quote;
 
+	quote = 0;
 	str = malloc(INPUT_SIZE);
 	while (++i != (int)ft_strlen(e->input))
 	{
-		k = 0;
-		if (e->input[i] == '\'')
+		k = -1;
+		if (e->input[i] == '\'' && quote == 0)
 			while(e->input[i + 1] && e->input[i + 1] != '\'')
 				++i;
 		if (e->input[i] == '$')
 		{
 			sav = i;
 			while (e->input[++i] && e->input[i] != ' ' && e->input[i] != '\t'
-				&& e->input[i] != '\"' && e->input[i] != '\'')
-			{
+				&& e->input[i] != '"' && e->input[i] != '\'' && ++k != -1)
 				str[k] = e->input[i];
-				++k;
-			}
-			str[k] = '\0';
+			str[k + 1] = '\0';
 			i = ft_replacestr(e, find_param(e->ev, str), sav, i);
 		}
+		if (e->input[i] == '"' && quote == 0)
+			quote = 1;
+		else if (e->input[i] == '"')
+			quote = 0;
 	}
 	free(str);
 }
