@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 15:01:08 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 16:54:06 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ int		ft_read(t_env *env)
 	if (env->input)
 		(env->input)[0] = '\0';
 	if (env->savev && (i = -1))
-		while (env->savev[++i])
-		{
+	{
+		while(env->ev[++i])
 			free(env->ev[i]);
-			env->ev[i] = ft_strdup(env->savev[i]);
-			*env->savev = 0;
-		}
+		free(env->ev);
+		env->ev = env->savev;
+	}
 	ft_printf("\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s", L'✈', env->dir, PROMPT);
 	return (0);
 }

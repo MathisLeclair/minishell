@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/17 15:06:45 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 16:52:05 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void	reco_env(t_env *env, char **split, int j)
 	}
 	if (c == 1 && (c = -1))
 	{
-		env->savev = malloc(sizeof(char **) * INPUT_SIZE);
-		while (env->ev[++c])
-			env->savev[c] = ft_strdup(env->ev[c]);
+		env->savev = env->ev;
+		env->ev = malloc(sizeof(char **));
+		env->ev[0] = 0;
 	}
 	while (split[i] && (j = -1))
 	{
@@ -100,7 +100,10 @@ void	reco_env(t_env *env, char **split, int j)
 			add_var_to_env(env, split[i]);
 		else
 		{
-			env->input = ft_strdup((*(ft_strstr(env->input, split[i]) - 1) == '\'' || *(ft_strstr(env->input, split[i]) - 1) == '"') ? ft_strstr(env->input, split[i]) - 1 : ft_strstr(env->input, split[i]));
+			c = 0;
+			while (env->input[c] != 'v')
+				++c;
+			env->input = ft_strdup((*(ft_strstr(env->input + c, split[i]) - 1) == '\'' || *(ft_strstr(env->input + c, split[i]) - 1) == '"') ? ft_strstr(env->input + c, split[i]) - 1 : ft_strstr(env->input + c, split[i]));
 			ft_reco_cmd(env);
 			break ;
 		}
