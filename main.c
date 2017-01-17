@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/16 16:48:39 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 17:12:25 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	shlvl(t_env *env)
 	int 	i;
 	int		t;
 
-	i = find_param_env(env, "SHLVL");
+	i = find_param(env->ev, "SHLVL");
 	if (i > -1)
 		t = ft_atoi(env->ev[i] + 6);
 	else

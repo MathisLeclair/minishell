@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 17:07:01 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 17:36:26 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_fork(t_env *env, char **input)
 	int		status;
 	char	*tmp;
 	char	*tmp2;
-	int		t;
+	size_t	t;
 	struct stat buf[INPUT_SIZE];
 	char	pwd[INPUT_SIZE + 4];
 
@@ -29,30 +29,27 @@ void	ft_fork(t_env *env, char **input)
 	env->i = i;
 	if (i == 0)
 	{
-		if ((i = find_param_env(env, "PATH")) == -1)
-		{
-			error(-2, *input);
-			exit(0);
-		}
-		if (env->ev[i])
+		if ((i = find_param(env->ev, "PATH")) != -1)
 			env->path = ft_strsplit(env->ev[i] + 5, ':');
+		else if ((i = find_param(env->savev, "PATH")) != -1)
+			env->path = ft_strsplit(env->savev[i] + 5, ':');
 		i = 0;
-		while (env->path[i])
+		while (env->path && env->path[i])
 		{
 			tmp = ft_strjoin(env->path[i], "/");
 			tmp2 = ft_strjoin(tmp, *input);
 			execve(tmp2, input, env->ev);
 			free(tmp);
-			tmp = *input;
-			t = (int)ft_strlen(*input);
-			while (t != 0 && (*input)[t] != '/')
-				--t;
-			*input += t + 1;
-			execve(tmp, input, env->ev);
-			*input = tmp;
 			free(tmp2);
 			++i;
 		}
+		tmp = *input;
+		t = ft_strlen(*input);
+		while (t != 0 && (*input)[t] != '/')
+			--t;
+		*input += t + 1;
+		execve(tmp, input, env->ev);
+		*input = tmp;
 		if (ft_cmpspec(*input, "./") == 1)
 		{
 			tmp = ft_strjoin(pwd + 4, *input + 1);

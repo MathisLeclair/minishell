@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 18:44:05 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 17:12:23 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_dollar(t_env *e, int i)
 				++k;
 			}
 			str[k] = '\0';
-			i = ft_replacestr(e, find_param_env(e, str), sav, i);
+			i = ft_replacestr(e, find_param(e->ev, str), sav, i);
 		}
 	}
 	free(str);

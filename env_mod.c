@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   env_mod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/12 15:03:01 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 17:12:49 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		find_param_env(t_env *env, char *str)
+int		find_param(char **split, char *str)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (env->ev[i])
+	while (split[i])
 	{
 		j = 0;
-		while (str[j] && str[j] != '=' && str[j] == env->ev[i][j])
+		while (str[j] && str[j] != '=' && str[j] == split[i][j])
 			j++;
 		if (str[j] == '=' || str[j] == 0)
 			break ;
 		++i;
 	}
-	if (env->ev[i] && env->ev[i][j] == '=')
+	if (split[i] && split[i][j] == '=')
 		return (i);
 	return(-1);
 }
@@ -54,7 +54,7 @@ void	add_var_to_env(t_env *env, char *str)
 	int		j;
 	char	**new_env;
 
-	i = find_param_env(env, str);
+	i = find_param(env->ev, str);
 	if (i == -1)
 	{
 		j = 0;
@@ -83,7 +83,7 @@ void	suppr_var_env(t_env *env, char *str)
 {
 	int i;
 
-	i = find_param_env(env, str);
+	i = find_param(env->ev, str);
 	if (i != -1)
 	{
 		free(env->ev[i]);

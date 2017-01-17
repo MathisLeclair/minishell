@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 16:54:06 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 17:13:16 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,9 @@ void	ft_cd(char **split, t_env *env, size_t i)
 			return (error(-1, NULL));
 	}
 	else
-		if (chdir(env->ev[find_param_env(env, "HOME")] + 5) == -1)
+		if (chdir(env->ev[find_param(env->ev, "HOME")] + 5) == -1)
 			return (error(-8, NULL));
-	set_oldpwd(env, env->ev[find_param_env(env, "PWD")]);
+	set_oldpwd(env, env->ev[find_param(env->ev, "PWD")]);
 	getpwd(pwd);
 	add_var_to_env(env, pwd);
 	env->dir = ft_strdup(pwd);
