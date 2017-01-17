@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:11:13 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 18:56:29 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ int		ft_read(t_env *env)
 			free(env->ev[i]);
 		free(env->ev);
 		env->ev = env->savev;
+		env->savev = NULL;
 	}
 	ft_printf("\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s", L'✈', env->dir, PROMPT);
+	free(input);
 	return (0);
 }
 
@@ -162,9 +164,14 @@ void	ft_reco_cmd2(char *input, t_env *env, char **split)
 	if (ft_strcmp(input, "Patate") == 0)
 			ft_putstr("[1]    35674 segmentation fault  ./minishell\n");
 	else if (ft_strcmp(split[0], "exit") == 0)
+	{
+		env_free(env);
+		free_double_array(split);
 		ft_exit();
+	}
 	else
 		ft_fork(env, split);
+	free_double_array(split);
 }
 
 void	ft_reco_cmd(t_env *env)

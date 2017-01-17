@@ -3,57 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/17 17:12:51 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 19:34:03 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// char	*remove_str(char *str, int start, int end)
-// {
-// 	char	*tmp;
-// 	int		i;
-
-// 	i = 0;
-// 	tmp = malloc(ft_strlen(str) + 1);
-// 	while (str[i] && i < start)
-// 	{
-// 		tmp[i] = str[i];
-// 		++i;
-// 	}
-// 	i = end;
-// 	while (str[i])
-// 	{
-// 		tmp[i] = str[i];
-// 		++i;
-// 	}
-// 	tmp[i] = '\0';
-// 	free(str);
-// 	return (tmp);
-// }
-
-// char	*pick_str(char *str, int start, int end)
-// {
-// 	int		i;
-// 	int		t;
-// 	char	*tmp;
-
-// 	i = start;
-// 	t = 0;
-// 	tmp = malloc(end - start + 2);
-// 	while(str[i] && i < end)
-// 	{
-// 		tmp[t] = str[i];
-// 		++i;
-// 		++t;
-// 	}
-// 	tmp[t]= '\0';
-// 	free(str);
-// 	return (tmp);
-// }
 
 void	print_split(char **split)
 {

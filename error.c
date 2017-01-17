@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/16 16:51:05 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/17 19:36:20 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	error(int i, char *str)
 {
-	if (i == 1)
-		exit(0);
-	else if (i == -1)
+	if (i == -1)
 		ft_putstr("No such file or directory\n");
 	else if (i == -2)
 		ft_printf("shell: command not found : %s\n", str);
@@ -28,6 +26,7 @@ void	error(int i, char *str)
 		ft_printf("shell: permission denied: %s\n", str);
 	else if(i == -6)
 	{
+		env_free(env());
 		ft_putstr("exit\n");
 		exit(0);
 	}

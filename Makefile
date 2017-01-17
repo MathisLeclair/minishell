@@ -26,7 +26,8 @@ FILE =	main \
 		ft_dollar \
 		set_env \
 		fork \
-		ft_strsplitquote
+		ft_strsplitquote \
+		free
 
 OBJ  := $(addsuffix .o, $(FILE))
 

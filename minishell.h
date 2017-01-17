@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 17:12:29 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/17 18:52:16 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ typedef struct	s_env
 }				t_env;
 
 /*
-**getnextline
+** main.c
+*/
+
+t_env			*env(void);
+
+/*
+** getnextline
 */
 
 int				get_next_line(const int fd, char **line);
@@ -99,6 +105,17 @@ void			ft_fork(t_env *env, char **input);
 
 void			getpwd(char *pwd);
 
+/*
+**ft_strsplitquote.c
+*/
+
 char		**ft_strsplitquote(char const *s, char c);
+
+/*
+** free.c
+*/
+
+void			env_free(t_env *env);
+void			free_double_array(char **tab);
 
 #endif
