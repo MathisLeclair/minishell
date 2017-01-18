@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:56:29 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 12:16:19 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ void	ft_reco_cmd2(char *input, t_env *env, char **split)
 		free_double_array(split);
 		ft_exit();
 	}
+	else if (ft_strcmp(split[0], "aperture") == 0)
+		ft_aperture();
 	else
 		ft_fork(env, split);
 	free_double_array(split);

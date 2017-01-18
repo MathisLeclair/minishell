@@ -27,7 +27,8 @@ FILE =	main \
 		set_env \
 		fork \
 		ft_strsplitquote \
-		free
+		free \
+		aperture
 
 OBJ  := $(addsuffix .o, $(FILE))
 

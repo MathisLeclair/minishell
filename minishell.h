@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:52:16 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 12:16:15 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ char		**ft_strsplitquote(char const *s, char c);
 
 void			env_free(t_env *env);
 void			free_double_array(char **tab);
+
+void	ft_aperture(void);
 
 #endif
