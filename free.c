@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 18:14:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:24:46 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:51:51 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,33 @@ void	env_free(t_env *env)
 	int i;
 
 	i = -1;
-	free(env->input);
-	free(env->dir);
-	if (env->ev)
+	if (env)
 	{
-		while (env->ev[++i])
-			free(env->ev[i]);
-		free(env->ev);
-	}
-	i = -1;
-	if (env->savev)
-	{
-		while (env->savev[++i])
-			free(env->savev[i]);
-		free(env->savev);
-	}
-	i = - 1;
-	if (env->path)
-	{
-		while (env->path[++i])
-			free(env->path[i]);
-		free(env->path);
+		if (env->input)
+		{
+			free(env->input);
+			env->input = NULL;
+		}
+		if (env->dir)
+			free(env->dir);
+		if (env->ev)
+		{
+			while (env->ev[++i])
+				free(env->ev[i]);
+			free(env->ev);
+		}
+		if (env->savev && (i = -1))
+		{
+			while (env->savev[++i])
+				free(env->savev[i]);
+			free(env->savev);
+		}
+		if (env->path && (i = -1))
+		{
+			while (env->path[++i])
+				free(env->path[i]);
+			free(env->path);
+		}
 	}
 }
 

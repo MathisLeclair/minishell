@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/17 19:34:03 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 18:04:50 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	reco_env(t_env *env, char **split, int j)
 			c = 0;
 			while (env->input[c] != 'v')
 				++c;
+			free(env->input);
 			env->input = ft_strdup((*(ft_strstr(env->input + c, split[i]) - 1) == '\'' || *(ft_strstr(env->input + c, split[i]) - 1) == '"') ? ft_strstr(env->input + c, split[i]) - 1 : ft_strstr(env->input + c, split[i]));
 			ft_reco_cmd(env);
 			break ;

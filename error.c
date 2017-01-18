@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 19:36:20 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:44:27 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error(int i, char *str)
 	else if(i == -6)
 	{
 		env_free(env());
-		ft_putstr("exit\n");
+		while (1);
 		exit(0);
 	}
 	else if (i == -7)

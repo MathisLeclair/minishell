@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:38:23 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:34:13 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_fork(t_env *env, char **input)
 			else
 				error(-4, *input);
 			free(tmp);
-			env_free(env);
+			// env_free(env);
 			exit(0);
 		}
 		error(-2, *input);

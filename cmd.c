@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/18 13:42:48 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 18:01:24 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ int		ft_read(t_env *env)
 	int i;
 
 	i = -1;
+	input = malloc(sizeof(char *));
 	if(get_next_line(1, &input) == 0)
+	{
 		error(-6, NULL);
+	}
 	inputspl = ft_strsplitquote(input, ';');
 	if (*input != '\0')
 		while (inputspl[++i])
@@ -71,8 +74,6 @@ int		ft_read(t_env *env)
 			ft_dollar(env, -1);
 			ft_reco_cmd(env);
 		}
-	if (env->input)
-		(env->input)[0] = '\0';
 	if (env->savev && (i = -1))
 	{
 		while(env->ev[++i])
@@ -160,6 +161,7 @@ void	ft_cd(char **split, t_env *env, size_t i)
 
 void	ft_exit()
 {
+	env_free(env());
 	ft_putstr("exit\n");
 	exit(1);
 }
@@ -170,7 +172,6 @@ void	ft_reco_cmd2(char *input, t_env *env, char **split)
 			ft_putstr("[1]    35674 segmentation fault  ./minishell\n");
 	else if (ft_strcmp(split[0], "exit") == 0)
 	{
-		env_free(env);
 		free_double_array(split);
 		ft_exit();
 	}
@@ -178,7 +179,13 @@ void	ft_reco_cmd2(char *input, t_env *env, char **split)
 		ft_aperture();
 	else
 		ft_fork(env, split);
-	free_double_array(split);
+	if (split)
+		free_double_array(split);
+	if (env->input)
+	{
+		free(env->input);
+		env->input = NULL;
+	}
 }
 
 void	ft_reco_cmd(t_env *env)
@@ -201,7 +208,12 @@ void	ft_reco_cmd(t_env *env)
 	else if (ft_strcmp(split[0], "env") == 0)
 		reco_env(env, split, 0);
 	else if (*env->input == '\n')
+	{
+		free(env->input);
+		env->input = NULL;
+		free_double_array(split);
 		return ;
+	}
 	else
 		ft_reco_cmd2(env->input, env, split);
 }

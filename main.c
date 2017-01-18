@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:45:55 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:59:23 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int		main(int ac, char **av, char **ev)
 		if ((ft_read(env())) == 0)
 			continue ;
 		else if (ft_read(env()) == -1)
+		{
+			env_free(env());
 			break ;
+		}
 	}
 	ft_putstr("GOODBYE\n");
 }
