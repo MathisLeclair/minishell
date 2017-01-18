@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/18 12:16:19 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/18 13:42:48 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,12 @@ void	ft_cd(char **split, t_env *env, size_t i)
 
 	if (split[1] && split[2] && split[3])
 		return (error(-7, NULL));
-	else if (split[1] && split[2])
+	else if (split[1][0] && !split[1][1] && split[1][0] == '-')
+	{
+		if (chdir(env->ev[find_param(env->ev, "OLDPWD")] + 7) == -1)
+			return (error(-1, NULL));
+	}
+	else if (split[1] && split[2] && split[1][0] != '-')
 	{
 		if (!(reg = ft_cd_regex(split, -1)))
 			return ;
@@ -135,7 +140,7 @@ void	ft_cd(char **split, t_env *env, size_t i)
 			return (error(-9, reg));
 		free(reg);
 	}
-	else if (split[1])
+	else if (split[1] && split[1][0] != '-')
 	{
 		if (chdir(split[1]) == -1)
 			return (error(-1, NULL));
