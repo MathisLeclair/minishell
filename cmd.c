@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 17:03:21 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/19 19:04:27 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ int		ft_reco_cmd(t_env *env)
 		while (split[++i])
 			suppr_var_env(env, split[i]);
 	else if (ft_strcmp(split[0], "env") == 0)
-		reco_env(env, split, 0);
+		reco_env(env, split, 0, 0);
 	else
 		return (ft_reco_cmd2(env->input, env, split));
+	if (split)
+		free_double_array(split);
 	return (1);
 }
 
@@ -103,7 +105,6 @@ int		ft_read(t_env *env)
 	char	**inputspl;
 	int		i;
 
-	input = malloc(sizeof(char *));
 	if (get_next_line(1, &input) == 0)
 		error(-6, NULL);
 	inputspl = ft_strsplitquote(input, ';');
@@ -113,7 +114,8 @@ int		ft_read(t_env *env)
 	{
 		env->input = inputspl[i];
 		ft_dollar(env, -1, 0);
-		if (!ft_reco_cmd(env) && (env->input = NULL) == NULL && free_double_array(inputspl))
+		if (!ft_reco_cmd(env) && (env->input = NULL) == NULL
+		&& free_double_array(inputspl))
 			ft_exit();
 	}
 	if (free_double_array(inputspl) && env->savev)

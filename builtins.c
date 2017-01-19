@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 16:40:58 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/19 16:41:02 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/19 18:55:24 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,24 @@ char	*ft_cd_regex(char **split, int k)
 	return (reg);
 }
 
+void	ft_newpwd(t_env *env)
+{
+	char	pwd[INPUT_SIZE + 5];
+	size_t	i;
+
+	set_oldpwd(env, env->ev[find_param(env->ev, "PWD")]);
+	getpwd(pwd);
+	add_var_to_env(env, pwd);
+	i = ft_strlen(pwd);
+	while (pwd[i] != '/' && pwd[i] != '=')
+		--i;
+	if (env->dir)
+		free(env->dir);
+	env->dir = ft_strdup((pwd[i + 1] == 0 ? 0 : 1) + pwd + i);
+}
+
 void	ft_cd(char **split, t_env *env, size_t i)
 {
-	char pwd[INPUT_SIZE + 5];
 	char *reg;
 
 	if (split[1] && split[2] && split[3])
@@ -66,14 +81,8 @@ void	ft_cd(char **split, t_env *env, size_t i)
 			return (error(-1, NULL));
 	}
 	else if (chdir(env->ev[find_param(env->ev, "HOME")] + 5) == -1)
-			return (error(-8, NULL));
-	set_oldpwd(env, env->ev[find_param(env->ev, "PWD")]);
-	getpwd(pwd);
-	add_var_to_env(env, pwd);
-	i = ft_strlen(pwd);
-	while (pwd[i] != '/' && pwd[i] != '=')
-		--i;
-	env->dir = ft_strdup((pwd[i + 1] == 0 ? 0 : 1) + pwd + i);
+		return (error(-8, NULL));
+	ft_newpwd(env);
 }
 
 void	ft_echo(char *input)

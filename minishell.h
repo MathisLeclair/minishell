@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 16:39:30 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/19 19:04:12 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			suppr_var_env(t_env *env, char *str);
 */
 
 void			print_split(char **split);
-void			reco_env(t_env *env, char **input, int i);
+void			reco_env(t_env *env, char **input, int i, int j);
 
 /*
 **ft_dollar.c
@@ -126,7 +126,6 @@ int				free_double_array(char **tab);
 void			ft_cd(char **split, t_env *env, size_t i);
 void			ft_echo(char *input);
 void			ft_exit(void);
-
 
 void			ft_aperture(void);
 
