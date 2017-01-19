@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 12:16:15 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 13:22:06 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_cd(char **split, t_env *env, size_t i)
 
 	if (split[1] && split[2] && split[3])
 		return (error(-7, NULL));
-	else if (split[1][0] && !split[1][1] && split[1][0] == '-')
+	else if (split[1] && split[1][0] && !split[1][1] && split[1][0] == '-')
 	{
 		if (chdir(env->ev[find_param(env->ev, "OLDPWD")] + 7) == -1)
 			return (error(-1, NULL));
@@ -143,7 +143,7 @@ void	ft_cd(char **split, t_env *env, size_t i)
 			return (error(-1, NULL));
 	}
 	else if (chdir(env->ev[find_param(env->ev, "HOME")] + 5) == -1)
-		return (error(-8, NULL));
+			return (error(-8, NULL));
 	set_oldpwd(env, env->ev[find_param(env->ev, "PWD")]);
 	getpwd(pwd);
 	add_var_to_env(env, pwd);

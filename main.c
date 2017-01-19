@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 12:14:51 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:51:35 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		main(int ac, char **av, char **ev)
 	ft_printf("\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s", L'✈', envi->dir, PROMPT);
 	while (1)
 	{
-		if ((ft_read(env())) == 0)
+		if ((ft_read(env(), -1)) == 0)
 			continue ;
 		else if (ft_read(env(), -1) == -1)
 		{
