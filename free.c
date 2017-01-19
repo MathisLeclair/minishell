@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 18:14:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 12:02:06 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 16:33:48 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	env_free(t_env *env)
 	}
 }
 
-void	free_double_array(char **tab)
+int		free_double_array(char **tab)
 {
 	int i;
 
@@ -66,4 +66,5 @@ void	free_double_array(char **tab)
 			free(tab[i]);
 		free(tab);
 	}
+	return (1);
 }

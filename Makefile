@@ -28,6 +28,7 @@ FILE =	main \
 		fork \
 		ft_strsplitquote \
 		free \
+		builtins \
 		aperture
 
 OBJ  := $(addsuffix .o, $(FILE))

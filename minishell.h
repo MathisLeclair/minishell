@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 12:15:41 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 16:39:30 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ char			*ft_super_strstr(const char *str1, const char *str2);
 **cmd.c
 */
 
-void			ft_reco_cmd(t_env *env);
-int				ft_read(t_env *env, int i);
+int				ft_read(t_env *env);
+int				ft_reco_cmd(t_env *env);
+void			ft_suppr_quotes(char *str, int i, int j);
 
 /*
 **error.c
@@ -116,7 +117,16 @@ char			**ft_strsplitquote(char const *s, char c);
 */
 
 void			env_free(t_env *env);
-void			free_double_array(char **tab);
+int				free_double_array(char **tab);
+
+/*
+** builtin.c
+*/
+
+void			ft_cd(char **split, t_env *env, size_t i);
+void			ft_echo(char *input);
+void			ft_exit(void);
+
 
 void			ft_aperture(void);
 
