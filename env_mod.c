@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_mod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 17:12:49 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:58:57 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		find_param(char **split, char *str)
 	}
 	if (split[i] && split[i][j] == '=')
 		return (i);
-	return(-1);
+	return (-1);
 }
 
 void	modif_var_env(t_env *env, char *str, int i)
@@ -55,14 +55,12 @@ void	add_var_to_env(t_env *env, char *str)
 	char	**new_env;
 
 	i = find_param(env->ev, str);
-	if (i == -1)
+	if (i == -1 && !(j = 0))
 	{
-		j = 0;
 		while (str[j] && str[j] != '=')
 			++j;
-		if (j != 0 && str[j] && str[j + 1])
+		if (j != 0 && str[j] && str[j + 1] && !(i = 0))
 		{
-			i = 0;
 			while (env->ev[i])
 				++i;
 			new_env = malloc(sizeof(char *) * (i + 2));

@@ -6,12 +6,12 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 13:53:34 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/13 15:05:24 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:14:36 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef SPRINTF_H
+# define SPRINTF_H
 
 # include <stdarg.h>
 # include <stdlib.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:47:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 17:36:53 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:15:23 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	set_env(t_env *env, char **ev)
 	i = ft_strlen(pwd);
 	while (pwd[i] != '/' && pwd[i] != '=')
 		--i;
-	env->dir = ft_strdup((pwd[i + 1] == 0 ?  0 : 1) + pwd + i);
+	env->dir = ft_strdup((pwd[i + 1] == 0 ? 0 : 1) + pwd + i);
 	env->savev = 0;
 }

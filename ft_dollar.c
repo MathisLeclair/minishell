@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dollar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/17 18:07:11 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:07:56 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_replace(t_env *env, char *str, int sav, int i)
 
 int		ft_replacestr(t_env *env, int ret, int sav, int i)
 {
-	char 	*str;
+	char	*str;
 	int		j;
 
 	if (ret == -1)
@@ -40,25 +40,22 @@ int		ft_replacestr(t_env *env, int ret, int sav, int i)
 		str = ft_strdup(env->ev[ret] + j + 1);
 		ft_replace(env, str, sav, i);
 		free(str);
-		return(sav + ft_strlen(str) - 1);
+		return (sav + ft_strlen(str) - 1);
 	}
 	return (sav - 1);
 }
 
-void	ft_dollar(t_env *e, int i)
+void	ft_dollar(t_env *e, int i, char quote)
 {
 	int		k;
 	int		sav;
 	char	*str;
-	char	quote;
 
-	quote = 0;
 	str = malloc(INPUT_SIZE);
-	while (++i != (int)ft_strlen(e->input))
+	while (++i != (int)ft_strlen(e->input) && (k = -1))
 	{
-		k = -1;
 		if (e->input[i] == '\'' && quote == 0)
-			while(e->input[i + 1] && e->input[i + 1] != '\'')
+			while (e->input[i + 1] && e->input[i + 1] != '\'')
 				++i;
 		if (e->input[i] == '$')
 		{

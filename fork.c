@@ -6,22 +6,21 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/18 16:34:13 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:18:18 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 void	ft_fork(t_env *env, char **input)
 {
-	pid_t	i;
-	int		status;
-	char	*tmp;
-	char	*tmp2;
-	size_t	t;
-	struct stat buf[INPUT_SIZE];
-	char	pwd[INPUT_SIZE + 4];
+	pid_t		i;
+	int			status;
+	char		*tmp;
+	char		*tmp2;
+	size_t		t;
+	struct stat	buf[INPUT_SIZE];
+	char		pwd[INPUT_SIZE + 4];
 
 	getpwd(pwd);
 	t = 0;
@@ -61,7 +60,6 @@ void	ft_fork(t_env *env, char **input)
 			else
 				error(-4, *input);
 			free(tmp);
-			// env_free(env);
 			exit(0);
 		}
 		error(-2, *input);

@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/18 12:16:15 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:15:41 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			*ft_super_strstr(const char *str1, const char *str2);
 */
 
 void			ft_reco_cmd(t_env *env);
-int				ft_read(t_env *env);
+int				ft_read(t_env *env, int i);
 
 /*
 **error.c
@@ -84,7 +84,7 @@ void			reco_env(t_env *env, char **input, int i);
 **ft_dollar.c
 */
 
-void			ft_dollar(t_env *env, int i);
+void			ft_dollar(t_env *env, int i, char quote);
 
 /*
 **set_env.c
@@ -109,7 +109,7 @@ void			getpwd(char *pwd);
 **ft_strsplitquote.c
 */
 
-char		**ft_strsplitquote(char const *s, char c);
+char			**ft_strsplitquote(char const *s, char c);
 
 /*
 ** free.c
@@ -118,6 +118,6 @@ char		**ft_strsplitquote(char const *s, char c);
 void			env_free(t_env *env);
 void			free_double_array(char **tab);
 
-void	ft_aperture(void);
+void			ft_aperture(void);
 
 #endif

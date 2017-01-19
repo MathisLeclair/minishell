@@ -6,11 +6,30 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 18:14:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/18 17:51:51 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:02:06 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	env_free2(t_env *env)
+{
+	int i;
+
+	i = 0;
+	if (env->savev && (i = -1))
+	{
+		while (env->savev[++i])
+			free(env->savev[i]);
+		free(env->savev);
+	}
+	if (env->path && (i = -1))
+	{
+		while (env->path[++i])
+			free(env->path[i]);
+		free(env->path);
+	}
+}
 
 void	env_free(t_env *env)
 {
@@ -32,18 +51,7 @@ void	env_free(t_env *env)
 				free(env->ev[i]);
 			free(env->ev);
 		}
-		if (env->savev && (i = -1))
-		{
-			while (env->savev[++i])
-				free(env->savev[i]);
-			free(env->savev);
-		}
-		if (env->path && (i = -1))
-		{
-			while (env->path[++i])
-				free(env->path[i]);
-			free(env->path);
-		}
+		env_free2(env);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/18 17:44:27 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:52:18 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ void	error(int i, char *str)
 		ft_printf("shell: exec format error: %s\n", str);
 	else if (i == -5)
 		ft_printf("shell: permission denied: %s\n", str);
-	else if(i == -6)
+	else if (i == -6)
 	{
 		env_free(env());
-		while (1);
 		exit(0);
 	}
 	else if (i == -7)

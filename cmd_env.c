@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/18 18:04:50 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:52:38 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_split(char **split)
 
 void	reco_env(t_env *env, char **split, int j)
 {
-	int 	i;
+	int		i;
 	int		c;
 
 	i = 0;

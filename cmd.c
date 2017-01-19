@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/18 18:01:24 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:16:15 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,25 @@ char	**ft_split_input(char *input)
 	return (a);
 }
 
-int		ft_read(t_env *env)
+int		ft_read(t_env *env, int i)
 {
-	char *input;
-	char **inputspl;
-	int i;
+	char	*input;
+	char	**inputspl;
 
-	i = -1;
 	input = malloc(sizeof(char *));
-	if(get_next_line(1, &input) == 0)
-	{
+	if (get_next_line(1, &input) == 0)
 		error(-6, NULL);
-	}
 	inputspl = ft_strsplitquote(input, ';');
 	if (*input != '\0')
 		while (inputspl[++i])
 		{
 			env->input = inputspl[i];
-			ft_dollar(env, -1);
+			ft_dollar(env, -1, 0);
 			ft_reco_cmd(env);
 		}
 	if (env->savev && (i = -1))
 	{
-		while(env->ev[++i])
+		while (env->ev[++i])
 			free(env->ev[i]);
 		free(env->ev);
 		env->ev = env->savev;
@@ -146,9 +142,8 @@ void	ft_cd(char **split, t_env *env, size_t i)
 		if (chdir(split[1]) == -1)
 			return (error(-1, NULL));
 	}
-	else
-		if (chdir(env->ev[find_param(env->ev, "HOME")] + 5) == -1)
-			return (error(-8, NULL));
+	else if (chdir(env->ev[find_param(env->ev, "HOME")] + 5) == -1)
+		return (error(-8, NULL));
 	set_oldpwd(env, env->ev[find_param(env->ev, "PWD")]);
 	getpwd(pwd);
 	add_var_to_env(env, pwd);
@@ -156,10 +151,10 @@ void	ft_cd(char **split, t_env *env, size_t i)
 	i = ft_strlen(pwd);
 	while (pwd[i] != '/' && pwd[i] != '=')
 		--i;
-	env->dir = ft_strdup((pwd[i + 1] == 0 ?  0 : 1) + pwd + i);
+	env->dir = ft_strdup((pwd[i + 1] == 0 ? 0 : 1) + pwd + i);
 }
 
-void	ft_exit()
+void	ft_exit(void)
 {
 	env_free(env());
 	ft_putstr("exit\n");
@@ -169,7 +164,7 @@ void	ft_exit()
 void	ft_reco_cmd2(char *input, t_env *env, char **split)
 {
 	if (ft_strcmp(input, "Patate") == 0)
-			ft_putstr("[1]    35674 segmentation fault  ./minishell\n");
+		ft_putstr("[1]    35674 segmentation fault  ./minishell\n");
 	else if (ft_strcmp(split[0], "exit") == 0)
 	{
 		free_double_array(split);
@@ -194,8 +189,7 @@ void	ft_reco_cmd(t_env *env)
 	int		i;
 
 	split = ft_split_input(env->input);
-	i = 0;
-	if (ft_strcmp(split[0], "cd") == 0)
+	if (!(i = 0) && ft_strcmp(split[0], "cd") == 0)
 		ft_cd(split, env, 0);
 	else if (ft_strcmp(split[0], "echo") == 0)
 		ft_echo(env->input);
