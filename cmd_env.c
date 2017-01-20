@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 13:40:05 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 14:13:58 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	reco_env_options(t_env *env, char **split, int *i)
 
 void	reco_env(t_env *env, char **split, int j, int i)
 {
-	int k;
+	int		k;
+	char	*s;
 
 	reco_env_options(env, split, &i);
 	while (split[i] && (j = -1))
@@ -66,7 +67,8 @@ void	reco_env(t_env *env, char **split, int j, int i)
 			while (env->input[k] != 'v')
 				++k;
 			free(env->input);
-			env->input = ft_strdup((*(ft_strstr(env->input + k, split[i]) - 1) == '\'' || *(ft_strstr(env->input + k, split[i]) - 1) == '"') ? ft_strstr(env->input + k, split[i]) - 1 : ft_strstr(env->input + k, split[i]));
+			s = ft_strstr(env->input + k, split[i]) - 1;
+			env->input = ft_strdup((*s == '\'' || *s == '"') ? s : s + 1);
 			ft_reco_cmd(env);
 			break ;
 		}
