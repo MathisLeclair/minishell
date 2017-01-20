@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 14:46:48 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:08:35 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void			getpwd(char *pwd);
 **ft_strsplitquote.c
 */
 
-char			**ft_strsplitquote(char const *s, char c);
+char			**ft_strsplitquote(char const *s, char c, char tab);
 
 /*
 ** free.c

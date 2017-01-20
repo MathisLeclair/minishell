@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 14:46:50 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:08:39 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**ft_split_input(char *input)
 	char	**a;
 
 	i = -1;
-	a = ft_strsplitquote(input, ' ');
+	a = ft_strsplitquote(input, ' ', 1);
 	i = -1;
 	while (a[++i])
 		ft_suppr_quotes(a[i], 0, 0);
@@ -109,7 +109,7 @@ int		ft_read(t_env *env)
 
 	if (get_next_line(1, &input) == 0)
 		error(-6, NULL);
-	inputspl = ft_strsplitquote(input, ';');
+	inputspl = ft_strsplitquote(input, ';', 0);
 	free(input);
 	i = -1;
 	while (inputspl && inputspl[++i])

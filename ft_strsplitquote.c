@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:58:49 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/19 16:39:47 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:40:11 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_wlen(const char *s, char c)
 	done = 0;
 	while ((*s != c || (*s == c && done != 0)) && *s)
 	{
-		if ((*s == '\'' || *s == '"') && done == *s)
+		if (done == *s)
 			done = 0;
 		else if ((*s == '\'' || *s == '"') && done == 0)
 			done = *s;
@@ -53,29 +53,55 @@ static int	ft_wlen(const char *s, char c)
 	return (l);
 }
 
-char		**ft_strsplitquote(char const *s, char c)
+char		*ft_tab_space(const char *str, char tab)
+{
+	char	*ret;
+	int		i;
+	int		done;
+
+	ret = ft_strdup(str);
+	if (ret == NULL)
+		return (NULL);
+	i = -1;
+	done = 0;
+	if (tab)
+		while(ret[++i])
+		{
+			if (done == ret[i])
+				done = 0;
+			else if ((ret[i] == '\'' || ret[i] == '"') && done == 0)
+				done = ret[i];
+			if (ret[i] == '\t' && done == 0)
+				ret[i] = ' ';
+		}
+	return (ret);
+}
+
+char		**ft_strsplitquote(char const *s, char c, char tab)
 {
 	char	**a;
 	int		nbw;
 	int		i;
+	char	*input;
+	char	*sv;
 
-	i = 0;
+	i = -1;
 	if (s == NULL)
 		return (NULL);
-	nbw = ft_cnt_parts((const char *)s, c);
+	input = ft_tab_space(s, tab);
+	sv = input;
+	nbw = ft_cnt_parts(input, c);
 	a = malloc(sizeof(char *) * nbw + 1);
 	if (a == NULL)
 		return (NULL);
-	while (nbw--)
+	while (nbw-- && ++i != -1)
 	{
-		while (*s == c && *s != '\0')
-			s++;
-		a[i] = ft_strsub((const char *)s, 0, ft_wlen((const char *)s, c));
-		if (a[i] == NULL)
-			return (NULL);
-		s = s + ft_wlen(s, c);
-		i++;
+		while (*input == c && *input != '\0')
+			input++;
+		a[i] = ft_strsub(input, 0, ft_wlen(input, c));
+		input += ft_wlen(input, c);
 	}
-	a[i] = NULL;
+	a[i + 1] = NULL;
+	free(sv);
 	return (a);
 }
