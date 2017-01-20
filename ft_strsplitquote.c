@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplitquote.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:58:49 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 16:30:16 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:41:42 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char		*ft_tab_space(const char *str, char tab)
 	i = -1;
 	done = 0;
 	if (tab)
-		while(ret[++i])
+		while (ret[++i])
 		{
 			if (done == ret[i])
 				done = 0;

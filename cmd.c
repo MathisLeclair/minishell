@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 16:39:27 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:40:58 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		ft_reco_cmd2(char *input, t_env *env, char **split)
 		ft_fork(env, split);
 	if (split)
 		free_double_array(split);
-	if(env->savev)
+	if (env->savev)
 	{
 		free_double_array(env->ev);
 		env->ev = env->savev;
@@ -89,7 +89,7 @@ int		ft_reco_cmd(t_env *env)
 		return (1);
 	split = ft_split_input(env->input);
 	if (!(i = 0) && ft_strcmp(split[0], "cd") == 0)
-		ft_cd(split, env, reg,ft_strnew(INPUT_SIZE + 4));
+		ft_cd(split, env, reg, ft_strnew(INPUT_SIZE + 4));
 	else if (ft_strcmp(split[0], "echo") == 0)
 		ft_echo(env->input);
 	else if (ft_strcmp(split[0], "setenv") == 0)

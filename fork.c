@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 15:00:56 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:41:09 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_child(t_env *env, char **input, char *pwd)
 }
 
 void	ft_fork(t_env *env, char **input)
-{ 
+{
 	int			status;
 	size_t		t;
 	char		pwd[INPUT_SIZE + 4];
