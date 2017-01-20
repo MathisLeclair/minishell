@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 15:08:35 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:25:37 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void			ft_suppr_quotes(char *str, int i, int j);
 */
 
 void			error(int i, char *str);
+void			*palloc(size_t	size);
 
 /*
 **env_mod.c

@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:58:49 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 15:40:11 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:30:16 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ char		**ft_strsplitquote(char const *s, char c, char tab)
 	input = ft_tab_space(s, tab);
 	sv = input;
 	nbw = ft_cnt_parts(input, c);
-	a = malloc(sizeof(char *) * nbw + 1);
-	if (a == NULL)
-		return (NULL);
+	a = palloc(sizeof(char *) * nbw + 1);
 	while (nbw-- && ++i != -1)
 	{
 		while (*input == c && *input != '\0')

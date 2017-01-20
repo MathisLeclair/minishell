@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 14:26:19 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:28:21 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	reco_env_options(t_env *env, char **split, int *i)
 	if (c == 1 && (c = -1))
 	{
 		env->savev = env->ev;
-		env->ev = malloc(sizeof(char **));
+		env->ev = palloc(sizeof(char **));
 		env->ev[0] = 0;
 	}
 }

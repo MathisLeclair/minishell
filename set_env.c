@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:47:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 12:15:23 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:26:33 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void	set_env(t_env *env, char **ev)
 	env->path = NULL;
 	while (ev[i])
 		++i;
-	env->ev = malloc(sizeof(char *) * (i + 1));
+	env->ev = palloc(sizeof(char *) * (i + 1));
+	if (env->ev == NULL)
+		error(-666, NULL);
 	env->ev[i] = 0;
 	while (i--)
 		env->ev[i] = ft_strdup(ev[i]);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 13:36:51 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/10 21:20:47 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:25:48 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minishell.h"
+#include "minishell.h"
 
 int		whereis(char *buff)
 {
@@ -32,7 +32,7 @@ char	*strresizee(char *s, int add)
 	char	*tmp;
 
 	len = ft_strlen(s);
-	tmp = malloc(sizeof(char) * (add + len + 1));
+	tmp = palloc(sizeof(char) * (add + len + 1));
 	ft_strcpy(tmp, s);
 	ft_bzero(tmp + len, add + 1);
 	free(s);
@@ -44,7 +44,7 @@ void	ft_filltruc(char **line, char *buff, int line_len)
 	line_len = whereis(buff);
 	if (line_len == -1)
 		line_len = ft_strlen(buff) + 1;
-	*line = malloc(sizeof(char) * line_len);
+	*line = palloc(sizeof(char) * line_len);
 	ft_strncpy(*line, buff, line_len);
 	(*line)[line_len - 1] = 0;
 	ft_strcpy(buff, buff + line_len);

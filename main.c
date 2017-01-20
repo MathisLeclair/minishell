@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:16:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 16:13:06 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:26:13 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_env	*env(void)
 	static t_env	*env = NULL;
 
 	if (env == NULL)
-		env = malloc(sizeof(t_env));
+		env = palloc(sizeof(t_env));
 	return (env);
 }
 

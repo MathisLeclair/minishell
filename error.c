@@ -6,11 +6,20 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:34:17 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 18:34:37 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:31:48 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	error2(int i)
+{
+	if (i == -666)
+	{
+		ft_putstr("Malloc error! ABORT! ABORT!!!!!!!!\n");
+		exit(0);
+	}
+}
 
 void	error(int i, char *str)
 {
@@ -37,4 +46,16 @@ void	error(int i, char *str)
 		ft_printf("shell: cd: no such file or directory: %s\n", str);
 	else if (i == -10)
 		ft_printf("shell: cd: string not in pwd: %s\n", str);
+	else
+		error2(i);
+}
+
+void	*palloc(size_t	size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (ptr == NULL)
+		error2(-666);
+	return (ptr);
 }

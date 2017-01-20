@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_mod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/19 11:58:57 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:28:39 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	add_var_to_env(t_env *env, char *str)
 		{
 			while (env->ev[i])
 				++i;
-			new_env = malloc(sizeof(char *) * (i + 2));
+			new_env = palloc(sizeof(char *) * (i + 2));
 			new_env[i + 1] = 0;
 			i = -1;
 			while (env->ev[++i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 16:40:58 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 14:46:59 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:27:36 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_cd_regex(char **split, int k)
 		error(-10, split[1]);
 	if (!sav)
 		return (NULL);
-	reg = malloc(ft_strlen(pwd + 4) + ft_strlen(split[2])
+	reg = palloc(ft_strlen(pwd + 4) + ft_strlen(split[2])
 	- ft_strlen(split[1]) + 1);
 	while (pwd + 4 + ++k < sav)
 		reg[k] = pwd[4 + k];

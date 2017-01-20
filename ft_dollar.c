@@ -6,7 +6,7 @@
 /*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 14:19:59 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:29:28 by bfrochot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_replace(t_env *env, char *str, int sav, int i)
 {
 	char *newinp;
 
-	newinp = malloc(ft_strlen(env->input) + ft_strlen(str));
+	newinp = palloc(ft_strlen(env->input) + ft_strlen(str));
 	newinp[0] = 0;
 	ft_strlcat(newinp, env->input, sav + 1);
 	ft_strcat(newinp, str);
@@ -49,7 +49,7 @@ void	ft_dollar(t_env *e, int i, char quote)
 	int		sav;
 	char	*str;
 
-	str = malloc(INPUT_SIZE);
+	str = palloc(INPUT_SIZE);
 	while (++i != (int)ft_strlen(e->input) && (k = -1))
 	{
 		if (e->input[i] == '\'' && quote == 0)
