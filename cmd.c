@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 16:58:38 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:33:48 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,23 @@ void	ft_suppr_quotes(char *str, int i, int j)
 {
 	char	quote;
 
-	quote = 0;
-	while (str[i])
+	while (str[i] && (quote = str[i]))
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 		{
-			quote = str[i];
-			++i;
-			while (str[i] && str[i] != quote)
-			{
-				str[j] = str[i];
-				++j;
-				++i;
-			}
+			while (str[++i] && str[i] != quote)
+				str[j++] = str[i];
 			if (str[i] && str[i + 1])
 				++i;
 			else
 				break ;
 		}
-		str[j] = str[i];
-		++i;
-		++j;
+		if (str[i] != '\'' && str[i] != '\"')
+		{
+			str[j] = str[i];
+			++i;
+			++j;
+		}
 	}
 	str[j] = 0;
 }
@@ -85,7 +81,7 @@ int		ft_reco_cmd(t_env *env)
 	if (!(i = 0) && ft_strcmp(split[0], "cd") == 0)
 		ft_cd(split, env, reg, ft_strnew(INPUT_SIZE + 4));
 	else if (ft_strcmp(split[0], "echo") == 0)
-		ft_echo(env->input);
+		ft_echo(split);
 	else if (ft_strcmp(split[0], "setenv") == 0)
 		while (split[++i])
 			add_var_to_env(env, split[i]);

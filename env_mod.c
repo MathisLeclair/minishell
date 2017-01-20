@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:15 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 16:48:22 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:15:43 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ int		find_param(char **split, char *str)
 		j = 0;
 		while (str[j] && str[j] != '=' && str[j] == split[i][j])
 			j++;
-		if (str[j] == '=' || str[j] == 0)
-			break ;
+		if ((str[j] == '=' || str[j] == 0) && split[i][j] == '=')
+			return (i);
 		++i;
 	}
-	if (split[i] && split[i][j] == '=')
-		return (i);
 	return (-1);
 }
 

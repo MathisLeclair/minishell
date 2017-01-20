@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 16:40:58 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 16:27:36 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:27:46 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,16 @@ void	ft_cd(char **split, t_env *env, char *reg, char *oldpwd)
 	ft_newpwd(env, oldpwd);
 }
 
-void	ft_echo(char *input)
+void	ft_echo(char **split)
 {
 	int i;
 
 	i = 0;
-	while (input[i] != 'o')
-		++i;
-	ft_suppr_quotes(input, 0, 0);
-	if (input[i + 1])
-		ft_putstr(input + i + 2);
+	while (split[++i])
+	{
+		ft_putstr(split[i]);
+		if (split[i + 1])
+			ft_putchar(' ');
+	}
 	ft_putchar('\n');
 }
