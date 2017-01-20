@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 16:40:58 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/19 18:55:24 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 13:39:48 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_newpwd(t_env *env)
 	env->dir = ft_strdup((pwd[i + 1] == 0 ? 0 : 1) + pwd + i);
 }
 
-void	ft_cd(char **split, t_env *env, size_t i)
+void	ft_cd(char **split, t_env *env)
 {
 	char *reg;
 
