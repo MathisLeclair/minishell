@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 17:11:41 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:31:42 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**ft_cpy_double_array(char **a)
 	char	**b;
 
 	i = -1;
-	while(a[++i])
+	while (a[++i])
 		;
 	b = malloc(sizeof(char*) * i + 1);
 	b[i] = 0;
