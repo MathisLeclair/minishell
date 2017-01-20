@@ -6,17 +6,23 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 17:30:06 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:49:51 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_child2(t_env *env, char **input, char *pwd)
+void	ft_child2(t_env *env, char **input, char *pwd, char *tmp)
 {
 	struct stat	buf[INPUT_SIZE];
-	char		*tmp;
+	size_t		t;
 
+	t = ft_strlen(*input);
+	while (t != 0 && (*input)[t] != '/')
+		--t;
+	if (tmp && tmp[0] == '/' && (*input += t + 1))
+		execve(tmp, input, env->ev);
+	*input = tmp;
 	if (ft_cmpspec(*input, "./") == 1)
 	{
 		tmp = ft_strjoin(pwd + 4, *input + 1);
@@ -55,7 +61,8 @@ void	ft_child(t_env *env, char **input, char *pwd)
 		free(tmp2);
 		++i;
 	}
-	ft_child2(env, input, pwd);
+	tmp = *input;
+	ft_child2(env, input, pwd, tmp);
 }
 
 void	ft_fork(t_env *env, char **input)
