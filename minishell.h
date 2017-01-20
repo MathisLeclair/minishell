@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 13:39:58 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 14:46:48 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int				free_double_array(char **tab);
 ** builtin.c
 */
 
-void			ft_cd(char **split, t_env *env);
+void			ft_cd(char **split, t_env *env, char *reg, char *oldpwd);
 void			ft_echo(char *input);
 void			ft_exit(void);
 

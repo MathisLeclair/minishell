@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 13:40:35 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 14:46:50 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ int		ft_reco_cmd(t_env *env)
 {
 	char	**split;
 	int		i;
+	char	*reg;
 
+	reg = 0;
 	if (*env->input == '\n')
 		return (1);
 	split = ft_split_input(env->input);
 	if (!(i = 0) && ft_strcmp(split[0], "cd") == 0)
-		ft_cd(split, env);
+		ft_cd(split, env, reg,ft_strnew(INPUT_SIZE + 4));
 	else if (ft_strcmp(split[0], "echo") == 0)
 		ft_echo(env->input);
 	else if (ft_strcmp(split[0], "setenv") == 0)

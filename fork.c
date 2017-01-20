@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 14:10:02 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:00:56 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_child(t_env *env, char **input, char *pwd)
 
 	if ((i = find_param(env->ev, "PATH")) != -1)
 		env->path = ft_strsplit(env->ev[i] + 5, ':');
-	else if ((i = find_param(env->savev, "PATH")) != -1)
+	else if (env->savev && (i = find_param(env->savev, "PATH")) != -1)
 		env->path = ft_strsplit(env->savev[i] + 5, ':');
 	i = 0;
 	while (env->path && env->path[i])
@@ -66,7 +66,7 @@ void	ft_child(t_env *env, char **input, char *pwd)
 }
 
 void	ft_fork(t_env *env, char **input)
-{
+{ 
 	int			status;
 	size_t		t;
 	char		pwd[INPUT_SIZE + 4];
