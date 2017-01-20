@@ -6,23 +6,17 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 16:41:09 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:30:06 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_child2(t_env *env, char **input, char *pwd, char *tmp)
+void	ft_child2(t_env *env, char **input, char *pwd)
 {
 	struct stat	buf[INPUT_SIZE];
-	size_t		t;
+	char		*tmp;
 
-	t = ft_strlen(*input);
-	while (t != 0 && (*input)[t] != '/')
-		--t;
-	*input += t + 1;
-	execve(tmp, input, env->ev);
-	*input = tmp;
 	if (ft_cmpspec(*input, "./") == 1)
 	{
 		tmp = ft_strjoin(pwd + 4, *input + 1);
@@ -52,7 +46,7 @@ void	ft_child(t_env *env, char **input, char *pwd)
 	else if (env->savev && (i = find_param(env->savev, "PATH")) != -1)
 		env->path = ft_strsplit(env->savev[i] + 5, ':');
 	i = 0;
-	while (env->path && env->path[i])
+	while (env->path && env->path[i] && ft_strchr(*input, '/') == 0)
 	{
 		tmp = ft_strjoin(env->path[i], "/");
 		tmp2 = ft_strjoin(tmp, *input);
@@ -61,8 +55,7 @@ void	ft_child(t_env *env, char **input, char *pwd)
 		free(tmp2);
 		++i;
 	}
-	tmp = *input;
-	ft_child2(env, input, pwd, tmp);
+	ft_child2(env, input, pwd);
 }
 
 void	ft_fork(t_env *env, char **input)

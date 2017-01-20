@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:16:47 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/20 16:28:21 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:11:41 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		save_env(t_env *env)
+{
+	if (env->savev)
+	{
+		free_double_array(env->ev);
+		env->ev = env->savev;
+		env->savev = NULL;
+	}
+	return (1);
+}
 
 void	print_split(char **split)
 {
@@ -22,6 +33,21 @@ void	print_split(char **split)
 		ft_putstr(split[i]);
 		ft_putchar('\n');
 	}
+}
+
+char	**ft_cpy_double_array(char **a)
+{
+	int		i;
+	char	**b;
+
+	i = -1;
+	while(a[++i])
+		;
+	b = malloc(sizeof(char*) * i + 1);
+	b[i] = 0;
+	while (i--)
+		b[i] = strdup(a[i]);
+	return (b);
 }
 
 void	reco_env_options(t_env *env, char **split, int *i)
@@ -47,6 +73,8 @@ void	reco_env_options(t_env *env, char **split, int *i)
 		env->ev = palloc(sizeof(char **));
 		env->ev[0] = 0;
 	}
+	else if (env->savev == NULL)
+		env->savev = ft_cpy_double_array(env->ev);
 }
 
 void	reco_env(t_env *env, char **split, int j, int i)

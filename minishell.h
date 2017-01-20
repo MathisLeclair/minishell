@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 16:25:37 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:58:20 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void			suppr_var_env(t_env *env, char *str);
 **cmd_env.c
 */
 
+int				save_env(t_env *env);
 void			print_split(char **split);
 void			reco_env(t_env *env, char **input, int i, int j);
 

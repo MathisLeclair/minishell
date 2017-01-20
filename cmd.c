@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 16:40:58 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:58:38 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,13 @@ int		ft_reco_cmd2(char *input, t_env *env, char **split)
 		free_double_array(split);
 		return (0);
 	}
-	else if (ft_strcmp(split[0], "aperture") == 0)
-		ft_aperture();
+	else if (ft_strcmp(split[0], "env") == 0)
+		reco_env(env, split, 0, 0);
 	else
 		ft_fork(env, split);
 	if (split)
 		free_double_array(split);
-	if (env->savev)
-	{
-		free_double_array(env->ev);
-		env->ev = env->savev;
-		env->savev = NULL;
-	}
-	return (1);
+	return (save_env(env));
 }
 
 int		ft_reco_cmd(t_env *env)
@@ -98,13 +92,13 @@ int		ft_reco_cmd(t_env *env)
 	else if (ft_strcmp(split[0], "unsetenv") == 0)
 		while (split[++i])
 			suppr_var_env(env, split[i]);
-	else if (ft_strcmp(split[0], "env") == 0)
-		reco_env(env, split, 0, 0);
+	else if (ft_strcmp(split[0], "aperture") == 0)
+		ft_aperture();
 	else
 		return (ft_reco_cmd2(env->input, env, split));
 	if (split)
 		free_double_array(split);
-	return (1);
+	return (save_env(env));
 }
 
 int		ft_read(t_env *env)
