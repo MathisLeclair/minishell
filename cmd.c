@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfrochot <bfrochot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 15:08:39 by bfrochot         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:39:27 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ int		ft_reco_cmd2(char *input, t_env *env, char **split)
 		ft_fork(env, split);
 	if (split)
 		free_double_array(split);
+	if(env->savev)
+	{
+		free_double_array(env->ev);
+		env->ev = env->savev;
+		env->savev = NULL;
+	}
 	return (1);
 }
 
@@ -120,12 +126,7 @@ int		ft_read(t_env *env)
 		&& free_double_array(inputspl))
 			ft_exit();
 	}
-	if (free_double_array(inputspl) && env->savev)
-	{
-		free_double_array(env->ev);
-		env->ev = env->savev;
-		env->savev = NULL;
-	}
+	free_double_array(inputspl);
 	ft_printf("\e[1;32m%C\e[0;m \e[1;36m%s \e[0m%s", L'✈', env->dir, PROMPT);
 	return (0);
 }
