@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 13:28:38 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 18:33:48 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:11:29 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		ft_reco_cmd(t_env *env)
 	split = ft_split_input(env->input);
 	if (!(i = 0) && ft_strcmp(split[0], "cd") == 0)
 		ft_cd(split, env, reg, ft_strnew(INPUT_SIZE + 4));
-	else if (ft_strcmp(split[0], "echo") == 0)
+	if (ft_strcmp(split[0], "echo") == 0)
 		ft_echo(split);
 	else if (ft_strcmp(split[0], "setenv") == 0)
 		while (split[++i])
@@ -112,6 +112,7 @@ int		ft_read(t_env *env)
 	{
 		env->input = inputspl[i];
 		ft_dollar(env, -1, 0);
+		ft_tilde(env, -1, 0);
 		if (!ft_reco_cmd(env) && (env->input = NULL) == NULL
 		&& free_double_array(inputspl))
 			ft_exit();

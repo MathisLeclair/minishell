@@ -29,7 +29,8 @@ FILE =	main \
 		ft_strsplitquote \
 		free \
 		builtins \
-		aperture
+		aperture \
+		tilde
 
 OBJ  := $(addsuffix .o, $(FILE))
 

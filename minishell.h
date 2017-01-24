@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 16:18:04 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 18:26:01 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:10:13 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void			reco_env(t_env *env, char **input, int i, int j);
 */
 
 void			ft_dollar(t_env *env, int i, char quote);
+int				ft_replacestr(t_env *env, int ret, int sav, int i);
+void			ft_replace(t_env *env, char *str, int sav, int i);
 
 /*
 **set_env.c
@@ -128,6 +130,12 @@ int				free_double_array(char **tab);
 void			ft_cd(char **split, t_env *env, char *reg, char *oldpwd);
 void			ft_echo(char **split);
 void			ft_exit(void);
+
+/*
+** tilde.c
+*/
+
+void			ft_tilde(t_env *e, int i, char quote);
 
 void			ft_aperture(void);
 

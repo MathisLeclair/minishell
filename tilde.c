@@ -1,68 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dollar.c                                        :+:      :+:    :+:   */
+/*   tilde.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/24 16:11:09 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:10:47 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_replace(t_env *env, char *str, int sav, int i)
+void	strreeplace(t_env *e, char *str, int start)
 {
 	char *newinp;
 
-	newinp = palloc(ft_strlen(env->input) + ft_strlen(str));
+	newinp = palloc(ft_strlen(e->input) + ft_strlen(str));
 	newinp[0] = 0;
-	ft_strlcat(newinp, env->input, sav + 1);
+	ft_strlcat(newinp, e->input, start + 1);
 	ft_strcat(newinp, str);
-	ft_strcat(newinp, env->input + i);
-	env->input = newinp;
+	if (ft_strlen(newinp) < ft_strlen(e->input) &&
+		start + ft_strlen(str) < ft_strlen(e->input))
+		ft_strcat(newinp, e->input + (start + ft_strlen(str)));
+	e->input = newinp;
 }
 
-int		ft_replacestr(t_env *env, int ret, int sav, int i)
-{
-	char	*str;
-	int		j;
-
-	if (ret == -1)
-		ft_replace(env, "", sav, i);
-	else
-	{
-		j = 0;
-		while (env->ev[ret][j] != '=')
-			++j;
-		str = ft_strdup(env->ev[ret] + j + 1);
-		ft_replace(env, str, sav, i);
-		return (sav + ft_strlen(str) - 1);
-	}
-	return (sav - 1);
-}
-
-void	ft_dollar(t_env *e, int i, char quote)
+void	ft_tilde(t_env *e, int i, char quote)
 {
 	int		k;
-	int		sav;
+	int		l;
 	char	*str;
 
-	str = palloc(INPUT_SIZE);
+	str = malloc(INPUT_SIZE);
+	*str = 0;
 	while (++i != (int)ft_strlen(e->input) && (k = -1))
 	{
 		if (e->input[i] == '\'' && quote == 0)
 			while (e->input[i + 1] && e->input[i + 1] != '\'')
 				++i;
-		if (e->input[i] == '$')
+		if (e->input[i] == '~')
 		{
-			sav = i;
-			while (e->input[++i] && e->input[i] != ' ' && e->input[i] != '\t'
-				&& e->input[i] != '"' && e->input[i] != '\'' && ++k != -1)
-				str[k] = e->input[i];
-			str[k + 1] = '\0';
-			i = ft_replacestr(e, find_param(e->ev, str), sav, i);
+			if ((l = find_param(e->ev, "HOME")) == -1)
+				ft_strcat(str, "/");
+			else
+				ft_strcat(str, e->ev[l] + 5);
+			strreeplace(e, str, i);
 		}
 		if (e->input[i] == '"' && quote == 0)
 			quote = 1;
