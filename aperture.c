@@ -6,11 +6,11 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 12:09:54 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/20 18:38:46 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:14:08 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "42sh.h"
 
 void	ft_aperture(void)
 {
