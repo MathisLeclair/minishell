@@ -30,7 +30,6 @@ FILE =	main \
 		free \
 		builtins \
 		aperture \
-		tilde
 
 OBJ  := $(addsuffix .o, $(FILE))
 

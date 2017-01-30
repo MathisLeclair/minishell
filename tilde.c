@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/24 16:14:56 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:38:49 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void	strreeplace(t_env *e, char *str, int start)
 	newinp[0] = 0;
 	ft_strlcat(newinp, e->input, start + 1);
 	ft_strcat(newinp, str);
-	if (ft_strlen(newinp) < ft_strlen(e->input) &&
-		start + ft_strlen(str) < ft_strlen(e->input))
-		ft_strcat(newinp, e->input + (start + ft_strlen(str)));
+	ft_strcat(newinp, e->input + start + 1);
 	e->input = newinp;
 }
 
@@ -30,9 +28,8 @@ void	ft_tilde(t_env *e, int i, char quote)
 {
 	int		k;
 	int		l;
-	char	*str;
+	char	str[INPUT_SIZE];
 
-	str = malloc(INPUT_SIZE);
 	*str = 0;
 	while (++i != (int)ft_strlen(e->input) && (k = -1))
 	{
@@ -52,5 +49,4 @@ void	ft_tilde(t_env *e, int i, char quote)
 		else if (e->input[i] == '"')
 			quote = 0;
 	}
-	free(str);
 }

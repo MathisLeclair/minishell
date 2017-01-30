@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:55:44 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/24 16:14:31 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:38:27 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	ft_child2(t_env *env, char **input, char *pwd, char *tmp)
 		tmp = ft_strjoin(pwd + 4, *input + 1);
 		execve(tmp, input, env->ev);
 		if (lstat(tmp, buf) == -1)
-			error(-1, NULL);
+			error(-1, NULL, NULL);
 		else if (!(buf->st_mode & S_IXUSR) || !(buf->st_mode & S_IROTH))
-			error(-5, *input);
+			error(-5, *input, NULL);
 		else
-			error(-4, *input);
+			error(-4, *input, NULL);
 		free(tmp);
 		exit(0);
 	}
-	error(-2, *input);
+	error(-2, *input, NULL);
 	env_free(env);
 	exit(0);
 }
@@ -79,7 +79,7 @@ void	ft_fork(t_env *env, char **input)
 	else
 	{
 		if (wait(&status) == -1)
-			error(-3, NULL);
+			error(-3, NULL, NULL);
 		env->i = 1;
 	}
 }

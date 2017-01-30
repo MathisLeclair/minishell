@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:47:40 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/24 16:14:52 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:38:47 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	set_env(t_env *env, char **ev)
 		++i;
 	env->ev = palloc(sizeof(char *) * (i + 1));
 	if (env->ev == NULL)
-		error(-666, NULL);
+		error(-666, NULL, NULL);
 	env->ev[i] = 0;
 	while (i--)
 		env->ev[i] = ft_strdup(ev[i]);

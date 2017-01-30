@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 16:40:58 by bfrochot          #+#    #+#             */
-/*   Updated: 2017/01/24 16:14:12 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:38:16 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_cd_regex(char **split, int k)
 
 	getpwd(pwd);
 	if (!(sav = ft_super_strstr(pwd + 4, split[1])))
-		error(-10, split[1]);
+		error(-10, split[1], NULL);
 	if (!sav)
 		return (NULL);
 	reg = palloc(ft_strlen(pwd + 4) + ft_strlen(split[2])
@@ -60,28 +60,29 @@ void	ft_cd(char **split, t_env *env, char *reg, char *oldpwd)
 {
 	getpwd(oldpwd);
 	if (split[1] && split[2] && split[3])
-		return (error(-7, NULL));
+		return (error(-7, NULL, oldpwd));
 	else if (split[1] && split[1][0] == '-' && !split[1][1])
 	{
 		if (chdir(env->ev[find_param(env->ev, "OLDPWD")] + 7) == -1)
-			return (error(-1, NULL));
+			return (error(-1, NULL, oldpwd));
 	}
 	else if (split[1] && split[2])
 	{
 		if (!(reg = ft_cd_regex(split, -1)))
 			return ;
 		if (chdir(reg) == -1)
-			return (error(-9, reg));
+			return (error(-9, reg, oldpwd));
 		free(reg);
 	}
 	else if (split[1])
 	{
 		if (chdir(split[1]) == -1)
-			return (error(-1, NULL));
+			return (error(-1, NULL, oldpwd));
 	}
 	else if (chdir(env->ev[find_param(env->ev, "HOME")] + 5) == -1)
-		return (error(-8, NULL));
+		return (error(-8, NULL, oldpwd));
 	ft_newpwd(env, oldpwd);
+	free(oldpwd);
 }
 
 void	ft_echo(char **split)

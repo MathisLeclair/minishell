@@ -6,7 +6,7 @@
 /*   By: mleclair <mleclair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:39:33 by mleclair          #+#    #+#             */
-/*   Updated: 2017/01/24 16:14:37 by mleclair         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:38:33 by mleclair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	ft_replace(t_env *env, char *str, int sav, int i)
 
 int		ft_replacestr(t_env *env, int ret, int sav, int i)
 {
-	char	*str;
+	char	str[INPUT_SIZE];
 	int		j;
 
+	*str = 0;
 	if (ret == -1)
 		ft_replace(env, "", sav, i);
 	else
@@ -36,7 +37,7 @@ int		ft_replacestr(t_env *env, int ret, int sav, int i)
 		j = 0;
 		while (env->ev[ret][j] != '=')
 			++j;
-		str = ft_strdup(env->ev[ret] + j + 1);
+		ft_strcat(str, env->ev[ret] + j + 1);
 		ft_replace(env, str, sav, i);
 		return (sav + ft_strlen(str) - 1);
 	}
